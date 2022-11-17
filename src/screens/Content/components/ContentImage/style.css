@@ -3,7 +3,7 @@
 	width: 70%;
 	background-image: url("../../../../assets/fundo-oficial.png");
 	background-repeat: no-repeat;
-	background-size: 900px;
+	background-size: 780px;
 }
 
 .content-title {
@@ -81,7 +81,7 @@
 
 
 	.content-title h1 {
-		font-size: 70px;
+		font-size: 80px;
 	}
 
 	.content-img {
@@ -89,18 +89,9 @@
 		background-size: 1200px;
 	}
 
-	.content-title {
-		margin-top: 50px;
-		margin-left: 20%;
-	}
-
-
 	.img-medico {
-		position: absolute;
-		bottom: 0;
-		right: 550px;
-		width: 650px;
+		right: 350px;
+		width: 600px;
 	}
-
 
 }

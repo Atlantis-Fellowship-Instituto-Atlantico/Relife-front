@@ -1,0 +1,54 @@
+.container-register {
+	width: 100%;
+	height: 100%;
+	background-image: url("../../../../../../assets/fundo-2.svg");
+	/* left: 0; */
+	background-repeat: no-repeat;
+	background-size: 42.875rem;
+	background-position: right center;
+}
+
+.form-register {
+	display: flex;
+	flex-direction: column;
+
+	gap: 1.25rem;
+	margin: 3.75rem 0;
+	/* padding-left: 120px; */
+}
+
+
+.info {
+
+	display: flex;
+	flex-direction: column;
+}
+
+.info input,
+.address-country input {
+	width: 38.125rem;
+
+}
+
+.address {
+	display: flex;
+	flex-direction: column;
+}
+
+.address-country input {
+	display: flex;
+}
+
+
+.smaller-input input {
+	width: 18.75rem;
+}
+
+
+.smaller-input input:first-child {
+	margin-right: 0.625rem;
+}
+
+.button-submit.register {
+	width: 38.125rem;
+}
