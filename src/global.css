@@ -28,13 +28,33 @@ input,
 button,
 select {
 	border: 0;
-	cursor: pointer;
+	/* cursor: pointer; */
 }
 
 button,
 select {
-
+	font-family: 'Poppins', sans-serif;
 	cursor: pointer;
+}
+
+
+input {
+	background-color: #F3F0F0;
+	width: 473px;
+	height: 70px;
+	font-size: 16px;
+	border-radius: 20px;
+	margin-bottom: 25px;
+	padding: 20px;
+	font-family: Poppins;
+
+}
+
+input:focus {
+	/* box-shadow: 0 0 0 0; */
+	outline: 0;
+	border: 2px solid #AED3D1;
+	border-color: #AED3D1;
 }
 
 .login {
@@ -52,6 +72,18 @@ select {
 
 .content-main-form .login-form {
 	position: absolute;
-	right: 15.625rem;
-	top: 30%;
+	right: 7.5rem;
+	top: 20%;
+}
+
+
+
+@media (min-width: 1800px) {
+
+	.content-main-form .login-form {
+		right: 15.625rem;
+		top: 30%;
+	}
+
+
 }

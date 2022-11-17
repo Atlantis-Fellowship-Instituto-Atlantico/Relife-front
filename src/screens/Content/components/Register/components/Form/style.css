@@ -1,0 +1,42 @@
+.form-register {
+	display: flex;
+	flex-direction: column;
+
+	gap: 30px;
+	margin: 60px 0;
+	/* padding-left: 120px; */
+}
+
+
+.info {
+	/* width: 900px; */
+	display: flex;
+	flex-direction: column;
+	gap: 14px;
+}
+
+.info input,
+.address-country input {
+	width: 610px;
+
+}
+
+.address {
+	display: flex;
+	flex-direction: column;
+	gap: 14px;
+}
+
+.address-country input {
+	display: flex;
+}
+
+
+.smaller-input input {
+	width: 300px;
+}
+
+
+.smaller-input input:first-child {
+	margin-right: 10px;
+}
