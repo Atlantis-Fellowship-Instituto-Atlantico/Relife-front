@@ -1,6 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Box } from '@mui/system'
-import React from 'react'
 import { useForm } from 'react-hook-form';
 
 import * as yup from "yup";
@@ -49,7 +48,7 @@ export const Form = () => {
 					</Box>
 				</Box>
 			</Box>
-			<button type="submit" />
+			<button type="submit" className='button-submit register'>Cadastrar</button>
 		</form>
 	)
 }

@@ -1,6 +1,5 @@
 import React from 'react'
 import Medico from "../../../../assets/medico.png"
-import { ContentImage } from '../ContentImage/Index'
 import "./style.css"
 export const ContentImageRegister = () => {
 	return (
@@ -8,8 +7,8 @@ export const ContentImageRegister = () => {
 			<div className='content-img'>
 
 				<div className='content-title'>
-					<h1 className='title-style-main'>Doe órgãos,</h1>
-					<h1 className='title-style'>Doe esperança.</h1>
+					<h1 className='title-style-main'>Entre para o nosso time e ajude a
+						salvar vidas!</h1>
 				</div>
 				<img src={Medico} alt="" className='img-medico' />
 			</div>

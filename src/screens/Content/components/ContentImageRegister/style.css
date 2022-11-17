@@ -1,4 +1,4 @@
-.content-img {
+/* .content-img {
 	position: relative;
 	width: 70%;
 	background-image: url("../../../../assets/fundo-verde.png");
@@ -52,9 +52,9 @@
 		display: none;
 	}
 
-}
+} */
 
-@media (max-width: 1350px) {
+/* @media (max-width: 1350px) {
 
 
 	.content-img {
@@ -72,12 +72,11 @@
 		position: absolute;
 		bottom: 0;
 		right: 100px;
-		/* width: 00px; */
 	}
 
-}
+} */
 
-@media (min-width: 1800px) {
+/* @media (min-width: 1800px) {
 
 
 	.content-title h1 {
@@ -103,4 +102,4 @@
 	}
 
 
-}
+} */

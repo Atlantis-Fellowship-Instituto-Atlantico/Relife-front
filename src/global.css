@@ -41,7 +41,7 @@ select {
 input {
 	background-color: #F3F0F0;
 	width: 473px;
-	height: 70px;
+	height: 60px;
 	font-size: 16px;
 	border-radius: 20px;
 	margin-bottom: 25px;
@@ -51,7 +51,6 @@ input {
 }
 
 input:focus {
-	/* box-shadow: 0 0 0 0; */
 	outline: 0;
 	border: 2px solid #AED3D1;
 	border-color: #AED3D1;
@@ -72,18 +71,19 @@ input:focus {
 
 .content-main-form .login-form {
 	position: absolute;
-	right: 7.5rem;
-	top: 20%;
+	/* right: 7rem;
+	top: 20%; */
 }
 
-
+.content-main-form .login-form {
+	right: 3rem;
+	top: 20%;
+}
 
 @media (min-width: 1800px) {
 
 	.content-main-form .login-form {
-		right: 15.625rem;
+		right: 9rem;
 		top: 30%;
 	}
-
-
 }

@@ -9,16 +9,16 @@ import { Form } from "./components/Form/Index";
 import { ContentImageRegister } from "../ContentImageRegister/Index";
 import { HeaderRegister } from "./components/Header/Index";
 import { Content } from "../../Index";
-
+import Medico from "../../../../assets/medico.png"
+import Background from "../../../../assets/fundo-2.svg"
 export default function FormRegister() {
 
 
 	return (
 		<Box className="container-register">
-			{/* <HeaderRegister /> */}
-			<Box>
-				{/* <Form /> */}
-				<ContentImageRegister />
+			<HeaderRegister />
+			<Box className="register-form ">
+				<Form />
 			</Box>
 		</Box>
 

@@ -1,8 +1,26 @@
 .container-register {
 	padding-left: 3.75rem;
+	/* position: absolute; */
 }
 
 .content-register {
 	display: flex;
+	position: relative;
+}
+
+/* IMAGEM BACKGROUND */
+.register-form {
+	display: flex;
+}
+
+.test {
+	/* position: absolute; */
+	/* top: 0;
+	right: 0; */
+	/* width: 40%;
+	height: 100%; */
+}
+
+.test-content-title h1 {
 	position: absolute;
 }
