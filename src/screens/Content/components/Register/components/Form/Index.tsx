@@ -7,6 +7,28 @@ import "./style.css"
 
 export const Form = () => {
 
+
+	const schema = yup.object({
+		name: yup.string().required(),
+		email: yup.string().required().email(),
+		cpf: yup.string().required().min(11),
+		telephone: yup.string().required().min(9),
+		cep: yup.string().required().min(8),
+		street: yup.string().required(),
+		Neighborhood: yup.string().required(),
+		city: yup.string().required(),
+		state: yup.string().required(),
+		password: yup.string().required().min(8)
+	}).required();
+
+	const { register, handleSubmit, formState: { errors, touchedFields }, resetField, setValue } = useForm({
+		resolver: yupResolver(schema),
+		// defaultValues: {
+		// 	name: '',
+		// 	email: '',
+		// 	cpf: '',
+		// }
+	});
 	// const handleCheckPostalCode = (
 	// 	values: formInputI,
 	// 	setFieldValue: (field: string, value: string) => void,
@@ -26,24 +48,6 @@ export const Form = () => {
 	// 		})
 	// }
 
-
-	const schema = yup.object({
-		name: yup.string().required(),
-		email: yup.string().required().email(),
-		cpf: yup.string().required().min(11),
-		telephone: yup.string().required().min(9),
-		cep: yup.string().required().min(8),
-		street: yup.string().required(),
-		Neighborhood: yup.string().required(),
-		city: yup.string().required(),
-		state: yup.string().required(),
-		password: yup.string().required().min(8)
-	}).required();
-
-
-	const { register, handleSubmit, formState: { errors } } = useForm({
-		resolver: yupResolver(schema)
-	});
 
 	const onSubmit = (data: any) => console.log(data);
 	return (

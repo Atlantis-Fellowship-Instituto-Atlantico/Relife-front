@@ -24,6 +24,19 @@ body {
 	color: #333333;
 }
 
+body::-webkit-scrollbar {
+	width: 1rem;
+}
+
+
+body::-webkit-scrollbar-thumb {
+	background-color: #ccc;
+	border-radius: 0.5rem;
+	border: 0.25rem solid white;
+	color: '#fff';
+
+}
+
 input,
 button,
 select {
@@ -40,11 +53,10 @@ select {
 input,
 select {
 	background-color: #F3F0F0;
-	width: 473px;
-	height: 60px;
-	font-size: 16px;
-	border-radius: 20px;
-
+	width: 29.5625rem;
+	height: 3.75rem;
+	font-size: 1rem;
+	border-radius: 1.25rem;
 	padding: 20px;
 	font-family: Poppins;
 
@@ -61,7 +73,7 @@ input:focus {
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	gap: 50px;
+	gap: 3.125rem;
 }
 
 .content-main-form {
@@ -76,6 +88,14 @@ input:focus {
 .content-main-form .login-form {
 	right: 3rem;
 	top: 20%;
+}
+
+input:autofill {
+	box-shadow: 0 0 0 1.875rem #F3F0F0 inset;
+}
+
+input:-webkit-autofill {
+	box-shadow: 0 0 0 1.875rem #F3F0F0 inset;
 }
 
 @media (min-width: 1800px) {
