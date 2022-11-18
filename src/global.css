@@ -28,7 +28,6 @@ input,
 button,
 select {
 	border: 0;
-	/* cursor: pointer; */
 }
 
 button,
@@ -38,13 +37,14 @@ select {
 }
 
 
-input {
+input,
+select {
 	background-color: #F3F0F0;
 	width: 473px;
 	height: 60px;
 	font-size: 16px;
 	border-radius: 20px;
-	margin-bottom: 25px;
+
 	padding: 20px;
 	font-family: Poppins;
 
@@ -71,8 +71,6 @@ input:focus {
 
 .content-main-form .login-form {
 	position: absolute;
-	/* right: 7rem;
-	top: 20%; */
 }
 
 .content-main-form .login-form {

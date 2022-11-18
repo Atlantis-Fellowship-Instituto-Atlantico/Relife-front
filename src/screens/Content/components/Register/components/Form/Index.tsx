@@ -7,7 +7,7 @@ import "./style.css"
 
 export const Form = () => {
 	const schema = yup.object({
-		firstName: yup.string().required(),
+		name: yup.string().required(),
 		age: yup.number().positive().integer().required(),
 	}).required();
 
@@ -20,11 +20,17 @@ export const Form = () => {
 	return (
 		<form onSubmit={handleSubmit(onSubmit)} className="form-register">
 			<Box className="info">
-				<input {...register("firstName")} placeholder="Nome completo" className="input-text" />
-				<input {...register("firstName")} placeholder="Email" className="input-text" />
+				<input {...register("name")} placeholder="Nome completo" className="input-text" />
+				<input {...register("email")} placeholder="Email" className="input-text" />
+				<input {...register("cpf")} placeholder="CPF" className="input-text" />
 				<Box className="smaller-input">
-					<input {...register("firstName")} placeholder="CPF" className="input-text" />
-					<input {...register("firstName")} placeholder="Telefone" className="input-text" />
+					<select {...register("sexo")}>
+						<option>Selecione</option>
+						<option value="feminino">Feminino</option>
+						<option value="masculino" >Masculino</option>
+						<option value="semOpcao">Prefiro não dizer</option>
+					</select>
+					<input {...register("telephone")} placeholder="Telefone" className="input-text" />
 				</Box>
 
 			</Box>
