@@ -6,7 +6,9 @@
 ## Install
 
   $ git clone https://github.com/Atlantis-Fellowship-Instituto-Atlantico/Relife-front.git
+	
   $ cd Relife-front
+	
   $ yarn
 
 ## Start & watch
