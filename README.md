@@ -1,6 +1,6 @@
 # RELIFE PROJECT
 
-## Requisitos
+## Requirements
 * For development, you only need Node.js and yarn installed in your environment.
 
 ## Install
