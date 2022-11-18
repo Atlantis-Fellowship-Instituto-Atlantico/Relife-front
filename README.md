@@ -1,28 +1,29 @@
 # RELIFE PROJECT
 
 ## Requisitos
-	* For development, you only need Node.js and yarn installed in your environment.
+* For development, you only need Node.js and yarn installed in your environment.
 
 ## Install
 
-  $ git clone https://github.com/Atlantis-Fellowship-Instituto-Atlantico/Relife-front.git
+ 	 $ git clone https://github.com/Atlantis-Fellowship-Instituto-Atlantico/Relife-front.git
 	
-  $ cd Relife-front
+ 	 $ cd Relife-front
 	
-  $ yarn
+ 	 $ yarn
 
 ## Start & watch
 
   $ yarn start
 
 ## Languages & tools
-	* React
-	* React-router-dom
-	* React-input-mask
-	* React-hook-form
-	* yup
-	* Typescript
-	* CSS
-	* Material-ui
+* React
+* React-router-dom
+* React-input-mask
+* React-hook-form
+* yup
+* Typescript
+* CSS
+* Material-ui
+
 
 
