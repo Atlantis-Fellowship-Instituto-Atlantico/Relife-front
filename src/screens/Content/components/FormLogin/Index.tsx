@@ -21,7 +21,7 @@ export const FormLogin = () => {
 	const [info, setInfo] = useState<IFormInputs>();
 
 	const validationSchema = yup.object({
-		email: yup.string().required("Email é obrigatório").email("E-mail inválido"),
+		email: yup.string().required("Email é obrigatório").email("E-mail com formato inválido"),
 		password: yup.string().required("Senha é obrigatório").min(8, "A senha tem no mínimo 8 dígitos"),
 	})
 
