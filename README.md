@@ -9,7 +9,6 @@
 
  	 $ cd Relife-front
 
- 	 $ yarn
 
 ## Start & watch
 
