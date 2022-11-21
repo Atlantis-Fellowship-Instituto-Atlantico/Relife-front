@@ -26,18 +26,6 @@
 	padding-left: 10px;
 }
 
-.info-details div {
-	display: flex;
-	gap: 10px;
-	margin-bottom: 10px;
-}
-
-.info-details select {
-	appearance: none;
-	-webkit-appearance: none;
-	-moz-appearance: none;
-	padding-right: 20px;
-}
 
 .address div {
 	display: flex;

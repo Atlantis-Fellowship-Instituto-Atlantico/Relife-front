@@ -5,7 +5,7 @@ export const ContentImage = () => {
 	return (
 		<div className='content-img'>
 
-			<div className='content-title'>
+			<div className='content-title-img'>
 				<h1 className='title-style-main'>Doe órgãos,</h1>
 				<h1 className='title-style'>Doe esperança.</h1>
 			</div>
