@@ -1,5 +1,4 @@
 import { Box, Typography, Link, Grid, Container, Button, Card, CardContent, Stack } from '@mui/material';
-import React from 'react'
 import { Menu } from './components/menu/index';
 import Banner from '../../assets/banner.png';
 import Orgao from '../../assets/orgao.png';
