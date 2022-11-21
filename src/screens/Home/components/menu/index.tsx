@@ -12,7 +12,7 @@ export const Menu = () => {
 					</Link>
 				</div>
 				<ul>
-					<li>
+					<li className='doe'>
 						<Link to="/login">
 							Doe agora
 						</Link>

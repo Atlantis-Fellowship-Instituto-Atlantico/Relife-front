@@ -1,4 +1,4 @@
-import React from 'react'
+
 
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
@@ -6,29 +6,37 @@ import WidgetsRoundedIcon from '@mui/icons-material/WidgetsRounded';
 
 import "./style.css"
 import { Link } from 'react-router-dom';
+import { Box } from '@mui/material';
 
-export const Aside = () => {
+interface Props {
+	subTitleOne?: string
+	subTitleTwo?: string
+	subTitleTree?: string
+	height?: string
+
+}
+
+export const Aside = ({ height }: Props) => {
 	return (
-		<article className="article-lateral">
-			<div className="content-icons menu">
-				<h2 className='title-admin'>Menu</h2>
-				<WidgetsRoundedIcon sx={{ width: "1.8rem", height: "1.8rem" }} />
-			</div>
-			<div className="content-icons">
-				<h3 className='subtitle-admin'>Admin</h3>
-				<AccountCircleOutlinedIcon sx={{ width: "1.8rem", height: "1.8rem" }} />
-			</div>
-			<div className="content-icons">
-				<h3 className='subtitle-admin'>Adicionar Instituição</h3>
-				<HomeOutlinedIcon sx={{ width: "1.8rem", height: "1.8rem" }} />
-			</div>
-			<div className="button-article">
-				<button>
-					<Link to="/">
-						<strong>Sair</strong>
+		<article className="article-lateral" style={{ height: height }}>
+
+			<Box className='article-lateral-menu'>
+				<Box className="content-icons menu">
+					<h2 className='title-admin'>Menu</h2>
+					<WidgetsRoundedIcon sx={{ width: "1.8rem", height: "1.8rem" }} />
+				</Box>
+				<Box className="content-icons">
+					<h3 className='subtitle-admin'>Admin</h3>
+					<AccountCircleOutlinedIcon sx={{ width: "1.8rem", height: "1.8rem" }} />
+				</Box>
+				<Box className="content-icons">
+					<Link to="/cadastro/instituicao">
+						<h3 className='subtitle-admin'>Adicionar Instituição</h3>
 					</Link>
-				</button>
-			</div>
+					<HomeOutlinedIcon sx={{ width: "1.8rem", height: "1.8rem" }} />
+				</Box>
+			</Box>
+
 		</article>
 	)
 }
