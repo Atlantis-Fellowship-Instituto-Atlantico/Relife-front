@@ -3,9 +3,9 @@
 }
 
 .header nav {
-	max-width: 1200px;
-	padding-top: 60px;
-	margin: 0 auto;
+	/* max-width: 1200px; */
+	padding-top: 40px;
+	margin: 0 60px;
 	display: flex;
 	gap: 20px;
 	align-items: center;
@@ -19,6 +19,16 @@
 
 .header nav ul li {
 	cursor: pointer;
+	font-weight: 600;
+}
+
+.header nav ul li:hover {
+	color: #009F70;
+}
+
+
+.doe {
+	color: #009F70;
 }
 
 .logo {

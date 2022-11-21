@@ -1,0 +1,19 @@
+.info-filter {
+	display: flex;
+	align-items: center;
+	/* justify-content: space-between; */
+	/* width: 600px */
+	/* margin-right: 200px; */
+	gap: 50px;
+}
+
+.button-filter {
+	display: flex;
+	gap: 30px;
+}
+
+.button-filter button {
+	padding: 10px 30px;
+	border-radius: 10px;
+	background-color: #A9D6D3;
+}

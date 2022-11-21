@@ -9,7 +9,9 @@ import { CardRegister } from './screens/Content/components/CardRegister/Index';
 import FormRegisterAdmin from "./screens/Content/components/Register/AdminRegister/Index";
 import { UserRegister } from "./screens/Content/components/Register/UserRegister/Index";
 import InstitutionRegister from "./screens/Content/components/Register/InstitutionRegister/Index";
-import Admin from "./screens/Admin/Index";
+
+import InstitutionController from './screens/Admin/InstitutionControle/Index';
+import AdminController from "./screens/Admin/AdminController/Index";
 
 
 function App() {
@@ -22,7 +24,8 @@ function App() {
 				<Route path="/cadastro/usuario" element={<UserRegister />} />
 				<Route path="/69ed90c76a11b9a7ee11467ef09503dbec35dbc7be84ba664a098c859416228b" element={<FormRegisterAdmin />} />
 				<Route path="/cadastro/instituicao" element={<InstitutionRegister />} />
-				<Route path="/69ed90c76a11b9a7ee11467ef09503dbec35dbc7be84ba664a098c859416228b/admin" element={<Admin />} />
+				<Route path="/instituicao/controle" element={<InstitutionController />} />
+				<Route path="/69ed90c76a11b9a7ee11467ef09503dbec35dbc7be84ba664a098c859416228b/admin/controle" element={<AdminController />} />
 
 			</Routes>
 		</div>

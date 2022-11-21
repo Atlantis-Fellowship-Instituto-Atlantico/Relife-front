@@ -3,13 +3,12 @@ import React from "react";
 import "./style.css";
 
 
-
-import { Aside } from "./components/Aside/Index";
-import { ProgressBar } from "./components/ProgressBar/Index";
-import { Header } from "./components/Header/Index";
 import { Box } from "@mui/system";
+import { Header } from "../components/Header/Index";
+import { ProgressBar } from "../components/ProgressBar/Index";
+import { Aside } from "../components/Aside/Index";
 
-function Admin() {
+function AdminController() {
 	return (
 		<Box className="body">
 			<Box className="content">
@@ -23,4 +22,4 @@ function Admin() {
 	);
 }
 
-export default Admin;
+export default AdminController;
