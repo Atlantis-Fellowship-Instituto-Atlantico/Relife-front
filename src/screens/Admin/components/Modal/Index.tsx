@@ -37,7 +37,6 @@ export default function ModalButton() {
 				onClose={handleClose}
 				aria-labelledby="modal-modal-title"
 				aria-describedby="modal-modal-description"
-				sx={{ borderRadius: "10px" }}
 			>
 				<Box sx={style}>
 					<Typography id="modal-modal-title" variant="h6" component="h2">
