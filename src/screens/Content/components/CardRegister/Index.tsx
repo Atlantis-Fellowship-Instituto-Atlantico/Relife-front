@@ -15,7 +15,7 @@ export const CardRegister = () => {
 			<Box className='login login-form'>
 				<Titles title="Cadastro" subtitle="Selecione uma opção para prosseguir" />
 
-				<Link to="/cadastroForm">
+				<Link to="/cadastro/usuario">
 					<Box className="card">
 						<Diversity1Icon sx={{ width: "2rem", height: "2rem" }} />
 						<Box className='card-box'>
@@ -25,7 +25,7 @@ export const CardRegister = () => {
 					</Box>
 				</Link>
 
-				<Link to="/cadastroForm">
+				<Link to="/cadastro/usuario">
 					<Box className="card">
 						<Diversity2Icon sx={{ width: "2rem", height: "2rem" }} />
 						<Box>

@@ -6,19 +6,19 @@
 	background-size: 780px;
 }
 
-.content-title {
+.content-title-img {
 	display: flex;
 	flex-direction: column;
 	margin-top: 50px;
 	margin-left: 20%;
 }
 
-.content-title h1 {
+.content-title-img h1 {
 	color: white;
 	font-size: 50px;
 }
 
-.content-title .title-style {
+.content-title-img .title-style {
 	margin-left: 80px;
 }
 
@@ -32,12 +32,12 @@
 @media (max-width: 800px) {
 
 
-	.content-title h1 {
+	.content-title-img h1 {
 
 		font-size: 35px;
 	}
 
-	.content-title .title-style {
+	.content-title-img .title-style {
 		margin-left: 0px;
 	}
 
@@ -62,7 +62,7 @@
 	}
 
 
-	.content-title {
+	.content-title-img {
 		margin-top: 50px;
 		margin-left: 20%;
 	}
@@ -80,7 +80,7 @@
 @media (min-width: 1800px) {
 
 
-	.content-title h1 {
+	.content-title-img h1 {
 		font-size: 80px;
 	}
 

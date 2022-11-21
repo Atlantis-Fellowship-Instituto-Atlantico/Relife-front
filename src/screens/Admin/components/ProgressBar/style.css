@@ -1,0 +1,51 @@
+.content-card {
+	margin: 5rem auto;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+
+	padding: 5rem;
+	box-shadow: 0.125rem 0.125rem 0.625rem 0rem grey;
+
+	width: 50rem;
+	height: 18.75rem;
+
+	border-radius: 0.625rem;
+}
+
+.content-bar-progress {
+	margin-top: 3.125rem;
+}
+
+.content-title {
+	width: 85%;
+}
+
+
+.content-70 h3 {
+	margin: 0;
+	font-size: 0.8rem;
+	text-align: right;
+}
+
+
+.progress-bar {
+	margin: 10px auto;
+	background-color: red;
+}
+
+.progress-bar {
+	--progress: 50;
+	height: 5px;
+	display: flex;
+	border-radius: 10px;
+	background-color: #ccc;
+}
+
+.progress-bar::before {
+	content: "";
+	width: calc(var(--progress) * 1%);
+	background-color: #ECF679;
+	transition: all 0.5s ease;
+}

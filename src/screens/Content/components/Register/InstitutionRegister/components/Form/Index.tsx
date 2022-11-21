@@ -7,38 +7,41 @@ import "./style.css"
 
 
 interface IFormInputs {
+	role?: string
 	name: string
+	responsibleName: string
+	cnpj: string
 	email: string
-	cpf: string
-	telephone: string
-	sexo: string
+	phone: string
+	password: string
+	isActive?: boolean
+	avatar?: string
 	cep: string
 	Neighborhood: string
-	number: string
 	country: string
 	city: string
 	street: string
 	state: string
-	password: string
+	number: string
 	complement: string
 }
 
-export const Form = () => {
+export const FormInstitution = () => {
 
 	const validationSchema = yup.object({
 		name: yup.string().required("Nome é um campo obrigatório"),
+		responsibleName: yup.string().required("Nome é um campo obrigatório"),
+		cnpj: yup.string().required("CNPJ é um campo obrigatório").min(14, "CNPJ necessita de 14 dígitos"),
 		email: yup.string().required("Email é um campo obrigatório").email("E-mail com formato inválido"),
-		cpf: yup.string().required("CPF é um campo obrigatório").min(11),
-
-		telephone: yup.string().required("Telefone é um campo obrigatório").min(9),
+		phone: yup.string().required("Telefone é um campo obrigatório").min(9, "Telefone necessita de 9 dígitos"),
+		password: yup.string().required("Senha é um campo obrigatório").min(8, "Sua senha necessita no mínimo de 8 dígitos"),
 
 		cep: yup.string().required("CEP é um campo obrigatório").min(8),
+		city: yup.string().required("Cidade é um campo obrigatório"),
+		state: yup.string().required("Estado é um campo obrigatório"),
 		street: yup.string().required("Rua é um campo obrigatório"),
 		Neighborhood: yup.string().required("Bairro é um campo obrigatório"),
 
-		city: yup.string().required("Cidade é um campo obrigatório"),
-		state: yup.string().required("Estado é um campo obrigatório"),
-		password: yup.string().required("Senha é um campo obrigatório").min(8)
 
 	})
 
@@ -46,49 +49,28 @@ export const Form = () => {
 		resolver: yupResolver(validationSchema),
 	});
 
-	// const handleCheckPostalCode = (
-	// 	values: formInputI,
-	// 	setFieldValue: (field: string, value: string) => void,
-	// 	setFieldTouched: (field: string, isTouched?: boolean) => void
-	// ) => {
-	// 	const { postalCode } = values
-	// 	if (postalCode?.length !== 8) {
-	// 		setFieldValue('city', '')
-	// 		setFieldValue('state', '')
-	// 	}
-	// 	setFieldTouched('postalCode', true)
-	// 	fetch(`https://viacep.com.br/ws/${postalCode}/json/`)
-	// 		.then((response) => response.json())
-	// 		.then((data) => {
-	// 			setFieldValue('city', data.localidade)
-	// 			setFieldValue('state', data.uf)
-	// 		})
-	// }
-
-
 	const onSubmitHandler = (data: IFormInputs) => {
 		console.log({ data });
 		reset();
-		resetField("cpf")
 	};
 
 	return (
 		<form onSubmit={handleSubmit(onSubmitHandler)} className="form-register">
 			<Box className="info">
 				<Box>
-					<label htmlFor='name'>Nome *</label>
+					<label htmlFor='name'>Nome*</label>
 					<input {...register("name")} placeholder="Nome completo" className="input-text" />
 					<p className="error-message">{errors.name?.message}</p>
 				</Box>
 				<Box>
-					<label htmlFor='email'>Email *</label>
-					<input {...register("email")} placeholder="Ex: email@gmail.com" className="input-text" />
+					<label htmlFor='responsibleName'>Nome do responsável*</label>
+					<input {...register("responsibleName")} placeholder="Digite o nome do responsável" className="input-text" />
 					<p className="error-message">{errors.email?.message}</p>
 				</Box>
 				<Box>
-					<label htmlFor='cpf'>CPF *</label>
-					<ReactInputMask mask="999.999.999-99" {...register("cpf")} placeholder="CPF" className="input-text" />
-					<p className="error-message">{errors.cpf?.message}</p>
+					<label htmlFor='cnpj'>CNPJ *</label>
+					<ReactInputMask mask="99.999.999/9999-99" {...register("cnpj")} placeholder="Digite o CNPJ" className="input-text" />
+					<p className="error-message">{errors.cnpj?.message}</p>
 				</Box>
 
 			</Box>
@@ -96,18 +78,14 @@ export const Form = () => {
 			<Box className="info-details">
 				<Box className="smaller-input">
 					<Box className="label-style">
-						<label htmlFor='sexo'>Sexo*</label>
-						<select {...register("sexo")}>
-							<option>Selecione</option>
-							<option value="feminino">Feminino</option>
-							<option value="masculino" >Masculino</option>
-							<option value="semOpcao">Prefiro não dizer</option>
-						</select>
+						<label htmlFor='email'>Email*</label>
+						<input {...register("email")} placeholder="Ex: email@gmail.com" className="input-text" />
+						<p className="error-message">{errors.email?.message}</p>
 					</Box>
 
 					<Box className="label-style">
-						<label htmlFor='cpf'>Telefone*</label>
-						<ReactInputMask mask="(99) 99999-999" {...register("telephone")} placeholder="(88)98888-8888" className="input-text" />
+						<label htmlFor='phone'>Telefone*</label>
+						<ReactInputMask mask="(99) 99999-999" {...register("phone")} placeholder="(88)98888-8888" className="input-text" />
 					</Box>
 				</Box>
 			</Box>
