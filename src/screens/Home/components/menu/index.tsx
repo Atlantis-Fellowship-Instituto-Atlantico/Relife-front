@@ -13,7 +13,7 @@ export const Menu = () => {
 				</div>
 				<ul>
 					<li>
-						<Link to="/login">
+						<Link to="/login" color='#009F70'>
 							Doe agora
 						</Link>
 					</li>
@@ -36,4 +36,5 @@ export const Menu = () => {
 			</nav>
 		</header>
 	)
+	
 }

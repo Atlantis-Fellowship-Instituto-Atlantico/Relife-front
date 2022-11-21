@@ -1,3 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Poppins:wght@600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
+
+
 .header {
 	height: 140px;
 }
@@ -24,4 +28,59 @@
 .logo {
 	width: 70px;
 	height: 70px;
+}
+
+.row{
+	display: flex;
+	flex-wrap: wrap;
+}
+.row h1 {
+	flex-direction: row;
+}
+
+.container{
+    margin: 15px;
+	max-width: 356px;
+	max-height: 147px;
+	font-size: 24px;
+	font-family: 'Inter', sans-serif;
+	text-align: center;
+	display: flex;
+justify-content: center;
+justify-content: space-around;
+}
+.card-subtitle {
+	color: #009f70;
+	font-size: 64px;
+	font-weight: 'Anton', sans-serif;
+	display: flex;
+justify-content: center;
+justify-content: space-around;
+}
+
+
+.display {
+display: flex;
+justify-content: center;
+justify-content: space-around;
+}
+
+.cards1 {
+display: flex;
+justify-content: center;
+justify-content: space-around;
+}
+
+.icon {
+display: flex;
+justify-content: center;
+justify-content: space-between;
+align-items: center;
+}
+
+.informes{
+display: flex;
+justify-content: center;
+justify-content: space-between;
+align-items: center;
 }
