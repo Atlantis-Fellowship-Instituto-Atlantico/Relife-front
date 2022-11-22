@@ -9,7 +9,9 @@ export const ButtonFilter = () => {
 				<button>Pendentes</button>
 				<button>Usuários associados</button>
 			</Box>
-			<input type="text" id="myInput" placeholder="Digite o CPF do usuário" />
+			<Box>
+				<input type="text" className="input-filter" placeholder="Digite o CPF do usuário" />
+			</Box>
 		</Box>
 	)
 }

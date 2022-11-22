@@ -1,12 +1,9 @@
-import React from "react";
-
-import "./style.css";
-
 
 import { Box } from "@mui/system";
 import { Header } from "../components/Header/Index";
 import { Aside } from "../components/Aside/Index";
 import TableContent from "../components/table/Index";
+import "./style.css";
 
 function InstitutionController() {
 	return (

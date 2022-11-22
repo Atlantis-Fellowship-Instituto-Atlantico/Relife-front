@@ -1,18 +1,18 @@
 .content-card {
-	margin: 5rem 3rem;
-
-	/* margin-right: 800px; */
+	margin: 5rem 5rem;
+	/*margin-right: 800px;
+	*/
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-
 	padding: 5rem;
-	box-shadow: 0.125rem 0.125rem 0.625rem 0rem grey;
-
+	border: 1px solid #e1e0e0;
+	/*box-shadow: 0.125rem 0.125rem 0.625rem 0rem grey;
+	*/
 	width: 90%;
 	height: 18.75rem;
-
 	border-radius: 0.625rem;
+
 }
 
 .content-bar-progress {

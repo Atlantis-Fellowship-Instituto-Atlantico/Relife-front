@@ -1,10 +1,9 @@
 .info-filter {
+	width: 100%;
 	display: flex;
 	align-items: center;
-	/* justify-content: space-between; */
-	/* width: 600px */
-	/* margin-right: 200px; */
-	gap: 50px;
+	justify-content: space-between;
+
 }
 
 .button-filter {
@@ -16,4 +15,8 @@
 	padding: 10px 30px;
 	border-radius: 10px;
 	background-color: #A9D6D3;
+}
+
+.input-filter {
+	height: 50px;
 }

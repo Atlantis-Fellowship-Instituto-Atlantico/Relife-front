@@ -3,7 +3,7 @@
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import WidgetsRoundedIcon from '@mui/icons-material/WidgetsRounded';
-
+import ModeEditOutlineOutlinedIcon from '@mui/icons-material/ModeEditOutlineOutlined';
 import "./style.css"
 import { Link } from 'react-router-dom';
 import { Box } from '@mui/material';
@@ -34,6 +34,12 @@ export const Aside = ({ height }: Props) => {
 						<h3 className='subtitle-admin'>Adicionar Instituição</h3>
 					</Link>
 					<HomeOutlinedIcon sx={{ width: "1.8rem", height: "1.8rem" }} />
+				</Box>
+				<Box className="content-icons">
+					<Link to="/editar/instituicao:id">
+						<h3 className='subtitle-admin'>Editar Instituição</h3>
+					</Link>
+					<ModeEditOutlineOutlinedIcon sx={{ width: "1.8rem", height: "1.8rem" }} />
 				</Box>
 			</Box>
 

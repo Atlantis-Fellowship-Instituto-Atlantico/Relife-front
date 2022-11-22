@@ -31,9 +31,10 @@ export const FormLogin = () => {
 	});
 
 
-	const onSubmitHandler = (data: IFormInputs) => {
-		console.log({ data });
-		setInfo(data)
+	const onSubmitHandler = ({ email, password }: IFormInputs) => {
+		console.log("submit", { email, password });
+		setInfo({ email, password })
+
 		reset();
 	};
 
@@ -50,10 +51,12 @@ export const FormLogin = () => {
 					<input type="password" placeholder='Senha' {...register("password")} />
 					<p className="error-message">{errors.password?.message}</p>
 
-					<button
-						type="submit"
-						className='button-submit'
-					>Fazer login</button>
+					<Link to="/instituicao/controle">
+						<button
+							type="submit"
+							className='button-submit'
+						>Fazer login</button>
+					</Link>
 				</form>
 				<Link to="/cadastro" className='link-register'>Ainda não tem uma conta ? <span className='link-register-span'>Cadastre-se</span></Link>
 			</Box>

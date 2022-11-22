@@ -3,16 +3,11 @@ import { Box } from '@mui/system'
 import { useForm } from 'react-hook-form';
 import ReactInputMask from 'react-input-mask';
 import * as yup from "yup";
+import { Admin } from '../../../../../../../Types/Admin';
+import { User } from '../../../../../../../Types/User';
 import "./style.css"
 
 
-interface IFormInputs {
-	role?: string
-	email: string
-	phone: string
-	password: string
-	isActive?: boolean
-}
 
 export const FormAdmin = () => {
 
@@ -22,11 +17,11 @@ export const FormAdmin = () => {
 		password: yup.string().required("Senha é um campo obrigatório").min(8)
 	})
 
-	const { register, handleSubmit, resetField, formState: { errors }, reset } = useForm<IFormInputs>({
+	const { register, handleSubmit, resetField, formState: { errors }, reset } = useForm<Admin>({
 		resolver: yupResolver(validationSchema),
 	});
 
-	const onSubmitHandler = (data: IFormInputs) => {
+	const onSubmitHandler = (data: Admin) => {
 		console.log({ data });
 		reset();
 	};
