@@ -3,28 +3,10 @@ import { Box } from '@mui/system'
 import { useForm } from 'react-hook-form';
 import ReactInputMask from 'react-input-mask';
 import * as yup from "yup";
+import { Institution } from '../../../../../../../Types/Institution';
 import "./style.css"
 
 
-interface IFormInputs {
-	role?: string
-	name: string
-	responsibleName: string
-	cnpj: string
-	email: string
-	phone: string
-	password: string
-	isActive?: boolean
-	avatar?: string
-	cep: string
-	Neighborhood: string
-	country: string
-	city: string
-	street: string
-	state: string
-	number: string
-	complement: string
-}
 
 export const FormInstitution = () => {
 
@@ -45,11 +27,11 @@ export const FormInstitution = () => {
 
 	})
 
-	const { register, handleSubmit, resetField, formState: { errors }, reset } = useForm<IFormInputs>({
+	const { register, handleSubmit, resetField, formState: { errors }, reset } = useForm<Institution>({
 		resolver: yupResolver(validationSchema),
 	});
 
-	const onSubmitHandler = (data: IFormInputs) => {
+	const onSubmitHandler = (data: Institution) => {
 		console.log({ data });
 		reset();
 	};

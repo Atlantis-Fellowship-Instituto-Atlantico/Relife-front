@@ -9,22 +9,13 @@ export const Header = () => {
 		<section className="header-menu-left">
 			<Box className="image-profile">
 				<img src={Profile} alt="usuário" />
-			</Box>
-			<Box className="header-title">
 				<Box className="text-menu-left">
 					<h1>Bem vindo, Lucas</h1>
 					<h3>Admin</h3>
 				</Box>
-				<ModalButton />
-				{/* <Box className="button-article">
-					<ModalButton />
-					<Link to="/">
-						<button>
-
-						</button>
-					</Link>
-				</Box> */}
 			</Box>
+
+			<ModalButton />
 		</section>
 	)
 }

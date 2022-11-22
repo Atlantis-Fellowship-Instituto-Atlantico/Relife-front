@@ -3,27 +3,12 @@ import { Box } from '@mui/system'
 import { useForm } from 'react-hook-form';
 import ReactInputMask from 'react-input-mask';
 import * as yup from "yup";
+import { User } from '../../../../../Types/User';
 import ContentRegister from '../components/ContentRegister/Index';
 import "./style.css"
 
 
-interface IFormInputs {
-	name: string
-	email: string
-	cpf: string
-	phone: string
-	sexo: string
-	cep: string
-	Neighborhood: string
-	number: string
-	country: string
-	city: string
-	street: string
-	state: string
-	complement: string
-	password: string
 
-}
 
 export const UserRegister = () => {
 
@@ -44,7 +29,7 @@ export const UserRegister = () => {
 
 	})
 
-	const { register, handleSubmit, resetField, formState: { errors }, reset } = useForm<IFormInputs>({
+	const { register, handleSubmit, resetField, formState: { errors }, reset } = useForm<User>({
 		resolver: yupResolver(validationSchema),
 	});
 
@@ -68,7 +53,7 @@ export const UserRegister = () => {
 	// }
 
 
-	const onSubmitHandler = (data: IFormInputs) => {
+	const onSubmitHandler = (data: User) => {
 		console.log({ data });
 		reset();
 		resetField("cpf")

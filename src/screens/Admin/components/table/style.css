@@ -12,6 +12,9 @@
 	width: 100%;
 }
 
+td {
+	cursor: pointer;
+}
 
 
 table {
@@ -57,8 +60,12 @@ tbody::-webkit-scrollbar-thumb {
 
 th,
 td {
-	text-align: left;
+	text-align: center;
 	padding: 16px;
+}
+
+td {
+	width: 100%;
 }
 
 .table tr.header th:first-child,
