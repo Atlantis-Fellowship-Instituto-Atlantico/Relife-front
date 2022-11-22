@@ -25,10 +25,12 @@ function App() {
 				<Route path="/login" element={<FormLogin />} />
 				<Route path="/cadastro" element={<CardRegister />} />
 				<Route path="/cadastro/usuario" element={<UserRegister />} />
-				<Route path="/69ed90c76a11b9a7ee11467ef09503dbec35dbc7be84ba664a098c859416228b" element={<FormRegisterAdmin />} />
+				<Route path="/cadastro/admin" element={<RequireAuth><FormRegisterAdmin /></RequireAuth>} />
 				<Route path="/cadastro/instituicao" element={<InstitutionRegister />} />
-				<Route path="/instituicao/controle" element={<RequireAuth><InstitutionController /></RequireAuth>} />
-				<Route path="/69ed90c76a11b9a7ee11467ef09503dbec35dbc7be84ba664a098c859416228b/admin/controle" element={<AdminController />} />
+				{/* <Route path="/dashboard" element={<RequireAuth><InstitutionController /></RequireAuth>} /> */}
+				<Route path="/test" element={<RequireAuth><AdminController /></RequireAuth>} />
+				{/* <Route path="/dashboard" element={<AdminController />} /> */}
+
 
 			</Routes>
 

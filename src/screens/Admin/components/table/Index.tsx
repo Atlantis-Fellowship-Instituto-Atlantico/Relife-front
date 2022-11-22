@@ -7,7 +7,16 @@ import DeleteIcon from '@mui/icons-material/Delete';
 
 import "./style.css"
 
-export default function TableContent() {
+interface Props {
+	header?: {
+		name: string;
+		t2: string;//vai variar de acordo com a tela, podendo ser cidade ou CPF
+	}
+	name?: string;
+	t2?: string; //vai variar de acordo com a tela, podendo ser cidade ou CPF
+}
+
+export default function TableContent({ header, name, t2 }: Props) {
 	return (
 		<div className='table-content'>
 
@@ -17,17 +26,17 @@ export default function TableContent() {
 				<table className='table'>
 					<thead>
 						<tr className="header">
-							<th>Nome completo</th>
-							<th>CPF</th>
+							<th>{header?.name}</th>
+							<th>{header?.t2}</th>
 							<th>Ação</th>
 
 						</tr>
 					</thead>
 					<tbody>
 						<tr>
-							<td>Alfreds Futterkiste</td>
+							<td>{name}</td>
 							<td>
-								000.000.000-00
+								{t2}
 							</td>
 							<td>
 								<ModeEditIcon />
@@ -35,46 +44,6 @@ export default function TableContent() {
 							</td>
 						</tr>
 
-						<tr>
-							<td>Alfreds Futterkiste</td>
-							<td>
-								000.000.000-00
-							</td>
-							<td>
-								<ModeEditIcon />
-								<DeleteIcon />
-							</td>
-						</tr>
-						<tr>
-							<td>Alfreds Futterkiste</td>
-							<td>
-								000.000.000-00
-							</td>
-							<td>
-								<ModeEditIcon />
-								<DeleteIcon />
-							</td>
-						</tr>
-						<tr>
-							<td>Alfreds Futterkiste</td>
-							<td>
-								000.000.000-00
-							</td>
-							<td>
-								<ModeEditIcon />
-								<DeleteIcon />
-							</td>
-						</tr>
-						<tr>
-							<td>Alfreds Futterkiste</td>
-							<td>
-								000.000.000-00
-							</td>
-							<td>
-								<ModeEditIcon />
-								<DeleteIcon />
-							</td>
-						</tr>
 						<tr>
 							<td>Alfreds Futterkiste</td>
 							<td>

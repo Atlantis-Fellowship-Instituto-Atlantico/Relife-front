@@ -16,7 +16,7 @@ interface Props {
 
 }
 
-export const Aside = ({ height }: Props) => {
+export const Aside = ({ subTitleOne, subTitleTwo, subTitleTree, height }: Props) => {
 	return (
 		<article className="article-lateral" style={{ height: height }}>
 

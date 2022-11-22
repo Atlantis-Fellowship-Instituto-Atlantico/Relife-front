@@ -6,8 +6,8 @@ import { User } from "../../Types/User";
 
 export interface AuthContextType {
 	user: User | null;
-	institution: Institution | null;
-	admin: Admin | null;
+	// institution: Institution | null;
+	// admin: Admin | null;
 
 	signin: (email: string, password: string) => Promise<boolean>;
 	signout: () => void;
