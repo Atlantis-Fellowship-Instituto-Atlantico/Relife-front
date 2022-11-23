@@ -9,6 +9,7 @@ import "./style.css"
 
 import { yupResolver } from '@hookform/resolvers/yup';
 import { ChangeEvent, useContext, useState } from 'react';
+import { AuthContext } from '../../../../context/AuthContext';
 // import { AuthContext } from '../../../../context/Auth/AuthContext';
 
 interface IFormInputs {
@@ -50,17 +51,11 @@ export const FormLogin = () => {
 		setPassword(event.target.value);
 	}
 
-	const handleLogin = async () => {
-		navigate("/dashboard/instituicao")
-		// if (email && password) {
-		// 	const isLogged = await auth.signin(email, password);
-		// 	if (isLogged) {
-		// 		// alert("fsdfsdfdeu certo.");
-		// 		navigate("/test")
-		// 	} else {
-		// 		alert("Não deu certo.");
-		// 	}
-		// }
+	const { authenticate } = useContext(AuthContext);
+
+	const handleLogin = async (e: any) => {
+		e.preventDefault();
+		await authenticate(email, password)
 	}
 
 	// console.log(info)
@@ -79,7 +74,7 @@ export const FormLogin = () => {
 					<button
 						type="submit"
 						className='button-submit'
-						onClick={handleLogin}
+						onClick={(e) => handleLogin(e)}
 					>Fazer login</button>
 
 				</form>
