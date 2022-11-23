@@ -9,7 +9,7 @@ import "./style.css"
 
 import { yupResolver } from '@hookform/resolvers/yup';
 import { ChangeEvent, useContext, useState } from 'react';
-import { AuthContext } from '../../../../context/Auth/AuthContext';
+// import { AuthContext } from '../../../../context/Auth/AuthContext';
 
 interface IFormInputs {
 	email: string
@@ -18,7 +18,7 @@ interface IFormInputs {
 
 
 export const FormLogin = () => {
-	const auth = useContext(AuthContext);
+	// const auth = useContext(AuthContext);
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
 
@@ -51,15 +51,16 @@ export const FormLogin = () => {
 	}
 
 	const handleLogin = async () => {
-		if (email && password) {
-			const isLogged = await auth.signin(email, password);
-			if (isLogged) {
-				// alert("fsdfsdfdeu certo.");
-				navigate("/test")
-			} else {
-				alert("Não deu certo.");
-			}
-		}
+		navigate("/dashboard/instituicao")
+		// if (email && password) {
+		// 	const isLogged = await auth.signin(email, password);
+		// 	if (isLogged) {
+		// 		// alert("fsdfsdfdeu certo.");
+		// 		navigate("/test")
+		// 	} else {
+		// 		alert("Não deu certo.");
+		// 	}
+		// }
 	}
 
 	// console.log(info)

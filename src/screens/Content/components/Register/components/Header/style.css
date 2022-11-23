@@ -9,3 +9,7 @@
 .description {
 	width: 31.25rem;
 }
+
+.header-register button {
+	background-color: transparent;
+}

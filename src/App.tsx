@@ -12,7 +12,7 @@ import InstitutionRegister from "./screens/Content/components/Register/Instituti
 
 import InstitutionController from './screens/Admin/InstitutionControle/Index';
 import AdminController from "./screens/Admin/AdminController/Index";
-import { RequireAuth } from "./context/Auth/RequireAuth";
+// import { RequireAuth } from "./context/Auth/RequireAuth";
 
 
 
@@ -20,18 +20,16 @@ function App() {
 	return (
 		<div className="App">
 			<Routes>
-
 				<Route path="/" element={<Home />} />
 				<Route path="/login" element={<FormLogin />} />
+
 				<Route path="/cadastro" element={<CardRegister />} />
 				<Route path="/cadastro/usuario" element={<UserRegister />} />
-				<Route path="/cadastro/admin" element={<RequireAuth><FormRegisterAdmin /></RequireAuth>} />
+				<Route path="/cadastro/admin" element={<FormRegisterAdmin />} />
 				<Route path="/cadastro/instituicao" element={<InstitutionRegister />} />
-				{/* <Route path="/dashboard" element={<RequireAuth><InstitutionController /></RequireAuth>} /> */}
-				<Route path="/test" element={<RequireAuth><AdminController /></RequireAuth>} />
-				{/* <Route path="/dashboard" element={<AdminController />} /> */}
 
-
+				<Route path="/dashboard/instituicao" element={<InstitutionController />} />
+				<Route path="/dashboard/admin" element={<AdminController />} />
 			</Routes>
 
 		</div>

@@ -22,7 +22,7 @@ export const Header = ({ sex, name, role = "Usuário" }: Props) => {
 				<img src={Profile} alt="usuário" />
 				<Box className="text-menu-left">
 					<h1>{sex === "Feminino" ? "Bem vinda" : " Bem vindo"}, {name}</h1>
-					<h3>{role === "Admin" ? "Admin" : "Institution"}</h3>
+					<h3>{role}</h3>
 				</Box>
 			</Box>
 

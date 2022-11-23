@@ -2,7 +2,7 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	margin: 3rem 30px;
+	margin: 3rem 1.875rem;
 
 }
 
@@ -18,10 +18,9 @@ td {
 
 
 table {
-	margin-top: 4rem;
+	margin-top: 1rem;
 	border-spacing: 0;
 	width: 100%;
-	/* border: 1px solid #ddd; */
 }
 
 thead,
@@ -33,7 +32,7 @@ tbody {
 
 tbody {
 	overflow-y: scroll;
-	height: 400px;
+	height: 350px;
 }
 
 tbody::-webkit-scrollbar {
@@ -53,20 +52,26 @@ tbody::-webkit-scrollbar-thumb {
 	height: 70px;
 }
 
-.table th,
+
 .table td {
 	width: 10%;
 }
 
-th,
-td {
-	text-align: center;
-	padding: 16px;
+.table th {
+	width: 10px;
+	width: 1%;
+
 }
 
-td {
-	width: 100%;
+tbody th,
+tbody td {
+	text-align: center;
+	padding: 16px 0px;
 }
+
+
+
+
 
 .table tr.header th:first-child,
 tr td:first-child {
