@@ -8,7 +8,6 @@ export const Banner = () => {
 				<img src={Banneer} alt="Banner" />
 				{/* <p>dliashdl</p> */}
 			</Box>
-
 		</Box>
 	)
 }

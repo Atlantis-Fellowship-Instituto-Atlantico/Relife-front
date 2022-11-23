@@ -28,6 +28,11 @@ export const Menu = () => {
 						</Link>
 					</li>
 					<li>
+						<Link to="/#">
+							Entre em contato
+						</Link>
+					</li>
+					<li>
 						<Link to="/about">
 							Sobre o projeto
 						</Link>
