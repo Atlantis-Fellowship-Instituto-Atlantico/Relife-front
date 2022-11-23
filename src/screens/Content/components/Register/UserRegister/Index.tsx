@@ -66,8 +66,8 @@ export const UserRegister = () => {
 				<Box className="info">
 					<Box>
 						<label htmlFor='name'>Nome *</label>
-						<input {...register("name")} placeholder="Nome completo" className="input-text" />
-						<p className="error-message">{errors.name?.message}</p>
+						<input {...register("full_name")} placeholder="Nome completo" className="input-text" />
+						<p className="error-message">{errors.full_name?.message}</p>
 					</Box>
 					<Box>
 						<label htmlFor='email'>Email *</label>
@@ -86,7 +86,7 @@ export const UserRegister = () => {
 					<Box className="smaller-input">
 						<Box className="label-style">
 							<label htmlFor='sexo'>Sexo*</label>
-							<select {...register("sexo")}>
+							<select {...register("sex")}>
 								<option>Selecione</option>
 								<option value="feminino">Feminino</option>
 								<option value="masculino" >Masculino</option>
@@ -105,26 +105,26 @@ export const UserRegister = () => {
 					<Box className="smaller-input">
 						<Box className="label-style">
 							<label htmlFor='country'>Pais*</label>
-							<input {...register("country")} placeholder="Pais" />
+							<input {...register("address.country")} placeholder="Pais" />
 						</Box>
 
 						<Box className="label-style">
 							<label htmlFor='cep'>CEP*</label>
-							<ReactInputMask mask="99999-999" {...register("cep")} placeholder="CEP" />
-							<p className="error-message">{errors.cep?.message}</p>
+							<ReactInputMask mask="99999-999" {...register("address.zip_cod")} placeholder="CEP" />
+							<p className="error-message">{errors.address?.zip_cod?.message}</p>
 						</Box>
 					</Box>
 					<Box className="smaller-input">
 						<Box>
 							<Box className="label-style">
 								<label htmlFor='street'>Rua*</label>
-								<input {...register("street")} placeholder="Rua" />
-								<p className="error-message">{errors.street?.message}</p>
+								<input {...register("address.street")} placeholder="Rua" />
+								<p className="error-message">{errors.address?.street?.message}</p>
 							</Box>
 
 							<Box className="label-style">
 								<label htmlFor='number'>Número</label>
-								<input {...register("number")} placeholder="Número" />
+								<input {...register("address.number")} placeholder="Número" />
 							</Box>
 						</Box>
 					</Box>
@@ -132,25 +132,25 @@ export const UserRegister = () => {
 					<Box className="smaller-input">
 						<Box className="label-style">
 							<label htmlFor='Neighborhood'>Complemento</label>
-							<input {...register("complement")} placeholder="Complemento" />
+							<input {...register("address.complement")} placeholder="Complemento" />
 						</Box>
 						<Box className="label-style">
 							<label htmlFor='Neighborhood'>Bairro*</label>
-							<input {...register("Neighborhood")} placeholder="Bairro" />
-							<p className="error-message">{errors.Neighborhood?.message}</p>
+							<input {...register("address.district")} placeholder="Bairro" />
+							<p className="error-message">{errors.address?.district?.message}</p>
 						</Box>
 					</Box>
 
 					<Box className="smaller-input">
 						<Box className="label-style">
 							<label htmlFor='city'>Cidade*</label>
-							<input {...register("city")} placeholder="Cidade" />
-							<p className="error-message">{errors.city?.message}</p>
+							<input {...register("address.city")} placeholder="Cidade" />
+							<p className="error-message">{errors.address?.city?.message}</p>
 						</Box>
 						<Box className="label-style">
 							<label htmlFor='state'>Estado*</label>
-							<input {...register("state")} placeholder="Estado" />
-							<p className="error-message">{errors.state?.message}</p>
+							<input {...register("address.uf")} placeholder="Estado" />
+							<p className="error-message">{errors.address?.uf?.message}</p>
 						</Box>
 					</Box>
 
@@ -167,7 +167,7 @@ export const UserRegister = () => {
 								</Box>
 								<Box className="label-style">
 									<label htmlFor='state'>Confirme a senha*</label>
-									<input {...register("state")} placeholder="Agora confirme a senha" type="password" />
+									<input {...register("password")} placeholder="Agora confirme a senha" type="password" />
 									<p className="error-message">{errors.password?.message}</p>
 								</Box>
 							</Box>

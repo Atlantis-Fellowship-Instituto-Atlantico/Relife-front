@@ -5,6 +5,7 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import "./style.css"
 import { Link } from 'react-router-dom';
+// import { AuthContext } from '../../../../context/Auth/AuthContext';
 
 const style = {
 	position: 'absolute' as 'absolute',
@@ -23,6 +24,12 @@ export default function ModalButton() {
 	const [open, setOpen] = React.useState(false);
 	const handleOpen = () => setOpen(true);
 	const handleClose = () => setOpen(false);
+	// const auth = React.useContext(AuthContext);
+
+	const handleLogout = async () => {
+		// await auth.signout();
+		// window.location.href = window.location.href;
+	}
 
 	return (
 		<Box>
@@ -43,7 +50,7 @@ export default function ModalButton() {
 						<button className="button-style-modal cancel" onClick={handleClose}>
 							Cancelar
 						</button>
-						<button className="button-style-modal exit">Sair</button>
+						<button onClick={handleLogout} className="button-style-modal exit">Sair</button>
 					</Box>
 				</Box>
 			</Modal>

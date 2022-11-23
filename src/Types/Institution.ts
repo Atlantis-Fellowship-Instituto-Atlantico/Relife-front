@@ -1,4 +1,6 @@
-export interface Institution {
+
+
+export type Institution = {
 	id: string;
 	role: string;
 	name: string;

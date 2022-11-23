@@ -1,4 +1,6 @@
-export interface Admin {
+
+
+export type Admin = {
 	id: string;
 	name:string;
 	role: string;

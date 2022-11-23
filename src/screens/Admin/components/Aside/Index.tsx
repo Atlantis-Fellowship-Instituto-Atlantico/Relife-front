@@ -12,11 +12,12 @@ interface Props {
 	subTitleOne?: string
 	subTitleTwo?: string
 	subTitleTree?: string
+	isIconActive?: boolean
 	height?: string
 
 }
 
-export const Aside = ({ height }: Props) => {
+export const Aside = ({ subTitleOne, subTitleTwo, subTitleTree, isIconActive, height }: Props) => {
 	return (
 		<article className="article-lateral" style={{ height: height }}>
 
@@ -26,20 +27,20 @@ export const Aside = ({ height }: Props) => {
 					<WidgetsRoundedIcon sx={{ width: "1.8rem", height: "1.8rem" }} />
 				</Box>
 				<Box className="content-icons">
-					<h3 className='subtitle-admin'>Admin</h3>
+					<h3 className='subtitle-admin'>{subTitleOne}</h3>
 					<AccountCircleOutlinedIcon sx={{ width: "1.8rem", height: "1.8rem" }} />
 				</Box>
 				<Box className="content-icons">
 					<Link to="/cadastro/instituicao">
-						<h3 className='subtitle-admin'>Adicionar Instituição</h3>
+						<h3 className='subtitle-admin'>{subTitleTwo}</h3>
 					</Link>
 					<HomeOutlinedIcon sx={{ width: "1.8rem", height: "1.8rem" }} />
 				</Box>
 				<Box className="content-icons">
 					<Link to="/editar/instituicao:id">
-						<h3 className='subtitle-admin'>Editar Instituição</h3>
+						<h3 className='subtitle-admin'>{subTitleTree}</h3>
 					</Link>
-					<ModeEditOutlineOutlinedIcon sx={{ width: "1.8rem", height: "1.8rem" }} />
+					{isIconActive && <ModeEditOutlineOutlinedIcon sx={{ width: "1.8rem", height: "1.8rem" }} />}
 				</Box>
 			</Box>
 

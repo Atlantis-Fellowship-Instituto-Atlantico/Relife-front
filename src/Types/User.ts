@@ -1,19 +1,27 @@
-export interface User {
-	id: string;
-	role:string;
-	name: string;
-	email: string;
-	cpf: string;
-	phone: string;
-	sexo: string;
-	cep: string;
-	Neighborhood: string;
-	number?: string;
-	country: string;
-	city: string;
-	street: string;
-	state: string;
-	complement?: string;
-	password?: string;
 
+
+export type User = {
+	user_id: string;
+	role: string;
+	full_name: string;
+	sex?: string;
+	cpf?: string;
+	phone?: string;
+	email: string;
+	isActive?: boolean;
+	mother_name?: string;
+	blood_type?: string;
+	password: string;
+
+	address: {
+		address_id: string;
+		zip_cod: string;
+		country: string;
+		uf: string;
+		city: string;
+		district: string;
+		street: string;
+		number: string;
+		complement: string;
+	}
 }
