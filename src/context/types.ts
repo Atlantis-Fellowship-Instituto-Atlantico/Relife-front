@@ -23,7 +23,9 @@ export interface IContext extends IUserData {
 	// token: TokenState;
 	authenticate(email: string, password: string): Promise<void>;
 	logout(): void;
-
+	userRole: string;
+	setUserRole: React.Dispatch<React.SetStateAction<string>>;
+	handleClick: (data: string) => void
 	// userLogged(): boolean;
 }
 

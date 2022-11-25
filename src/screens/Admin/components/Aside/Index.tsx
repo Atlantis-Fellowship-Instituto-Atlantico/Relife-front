@@ -7,12 +7,19 @@ import ModeEditOutlineOutlinedIcon from '@mui/icons-material/ModeEditOutlineOutl
 import "./style.css"
 import { Link } from 'react-router-dom';
 import { Box } from '@mui/material';
+import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
 
 interface Props {
 	subTitleOne?: string
 	subTitleTwo?: string
 	subTitleTree?: string
+
 	isIconActive?: boolean
+
+	link1?: string;
+	link2?: string;
+	link3?: string;
+
 	height?: string
 
 }

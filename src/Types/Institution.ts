@@ -1,22 +1,25 @@
 
 
 export type Institution = {
-	id: string;
+	institution_id: string;
+	institution_name: string;
+	responsible_name: string;
 	role: string;
-	name: string;
-	responsibleName: string;
 	cnpj: string;
 	email: string;
 	phone: string;
 	password: string;
 	isActive?: boolean
 	avatar?: string;
-	cep: string;
-	Neighborhood: string;
-	country: string;
-	city: string;
-	street: string;
-	state: string;
-	number: string;
-	complement: string;
+	address: {
+		address_id: string;
+		zip_cod: string;
+		country: string;
+		uf: string;
+		city: string;
+		district: string;
+		street: string;
+		number: string;
+		complement: string;
+	}
 }

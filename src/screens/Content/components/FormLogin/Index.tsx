@@ -1,4 +1,4 @@
-import { Box } from '@mui/material';
+import { Alert, Box } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import { Content } from '../../Index';
@@ -8,22 +8,21 @@ import * as yup from "yup";
 import "./style.css"
 
 import { yupResolver } from '@hookform/resolvers/yup';
-import { ChangeEvent, useContext, useState } from 'react';
-import { AuthContext } from '../../../../context/AuthContext';
-// import { AuthContext } from '../../../../context/Auth/AuthContext';
+import { ChangeEvent, useState } from 'react';
+import { useAuth } from '../../../../context/useAuth';
 
 interface IFormInputs {
 	email: string
 	password: string
 }
 
-
 export const FormLogin = () => {
-	// const auth = useContext(AuthContext);
+
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
 
-	const [info, setInfo] = useState<IFormInputs>();
+	const [erro, setErro] = useState();
+
 	const navigate = useNavigate()
 	const validationSchema = yup.object({
 		email: yup.string().required("Email é obrigatório").email("E-mail com formato inválido"),
@@ -31,44 +30,61 @@ export const FormLogin = () => {
 	})
 
 
-	const { register, handleSubmit, formState: { errors }, reset } = useForm<IFormInputs>({
+	const { register, formState: { errors } } = useForm<IFormInputs>({
 		resolver: yupResolver(validationSchema),
 	});
 
 
-	const onSubmitHandler = ({ email, password }: IFormInputs) => {
-		console.log("submit", { email, password });
-		setInfo({ email, password })
-
-		reset();
-	};
-
 	const handleEmailInput = (event: ChangeEvent<HTMLInputElement>) => {
 		setEmail(event.target.value);
+		console.log(email)
 	}
 
 	const handlePasswordInput = (event: ChangeEvent<HTMLInputElement>) => {
 		setPassword(event.target.value);
 	}
 
-	const { authenticate } = useContext(AuthContext);
+	const auth = useAuth()
 
-	const handleLogin = async (e: any) => {
+	const handleLogin = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+	) => {
 		e.preventDefault();
-		await authenticate(email, password)
+
+		try {
+			await auth.authenticate(email, password)
+			// console.log("ADMIN: ", auth.role)
+
+			if (auth.role === "ADMIN") {
+				return navigate("/dashboard/admin");
+			}
+
+			if (auth.role === "INSTITUTION") {
+				return navigate("/dashboard/instituicao");
+			}
+			if (auth.role === "RECEIVER") {
+				return navigate("/dashboard/receptor");
+			}
+			if (auth.role === "DONOR") {
+				return navigate("/dashboard/doador");
+			}
+
+		} catch (error: any) {
+			setErro(error)
+			// console.log("AQUI ERRO", error)
+			// < Alert className = 'AQUIII' severity = "error" > Senha ou email incorreto</ >
+		}
 	}
 
-	// console.log(info)
 	return (
 		<Box className="content-main-form">
 			<Content />
 			<Box className='login login-form'>
 				<Titles title="Login" subtitle="Adicione seus dados para prosseguir" />
-				<form onSubmit={handleSubmit(onSubmitHandler)} className="form-content">
+				<form className="form-content">
 
 					<input type="email" placeholder={'Digite seu email de acesso'} {...register("email")} onChange={handleEmailInput} value={email} />
 					<p className="error-message">{errors.email?.message}</p>
-					<input type="password" placeholder='Senha' {...register("password")} onChange={handlePasswordInput} value={password} />
+					<input type="password" placeholder='Digite sua senha' {...register("password")} onChange={handlePasswordInput} value={password} />
 					<p className="error-message">{errors.password?.message}</p>
 
 					<button
@@ -77,9 +93,11 @@ export const FormLogin = () => {
 						onClick={(e) => handleLogin(e)}
 					>Fazer login</button>
 
+					{erro && <Alert severity="error">Email ou senha incorreto</Alert>}
+
 				</form>
 				<Link to="/cadastro" className='link-register'>Ainda não tem uma conta ? <span className='link-register-span'>Cadastre-se</span></Link>
 			</Box>
-		</Box>
+		</Box >
 	);
 }

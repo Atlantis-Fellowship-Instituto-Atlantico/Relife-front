@@ -1,30 +1,12 @@
-import { api } from "../services/api";
 import { IUserData } from './types';
 
-// export async function LoginRequest(email: string, password: string) {
 
-// 	try {
-// 		const response = await api.post("/login", {
-// 			email,
-// 			password,
-// 		});
-
-// 		// console.log(response.data);
-
-// 		return response.data;
-
-// 	} catch (error) {
-// 		return null;
-// 	}
-// }
-
-
-export async function setUserLocalStorage(user: IUserData | null) {
-	localStorage.setItem("u", JSON.stringify(user));
+export function setUserLocalStorage(user: IUserData | null) {
+	const t = localStorage.setItem("u", JSON.stringify(user));
+	console.log(t)
 }
 
-
-export async function getUserLocalStorage() {
+export function getUserLocalStorage() {
 	const json = localStorage.getItem("u");
 	if (!json) {
 		return null;

@@ -1,6 +1,7 @@
 import {
 	createContext,
 	useCallback,
+	useEffect,
 	useState,
 } from "react";
 
@@ -10,7 +11,7 @@ import { IAuthProvider, IContext, ITokenInfo, IUserData, TokenState } from "./ty
 // import { LoginRequest } from "./util";
 
 import jwt_decode from 'jwt-decode'
-import { setUserLocalStorage } from "./util";
+import { getUserLocalStorage, setUserLocalStorage } from "./util";
 
 export const AuthContext = createContext<IContext>({} as IContext);
 
@@ -20,22 +21,21 @@ export const AuthProvider = ({ children }: IAuthProvider) => {
 
 
 	const [user, setUser] = useState<IUserData | null>(null);
+	const [userRole, setUserRole] = useState<string>('')
+	console.log(userRole)
 
-
-	const [token, setToken] = useState<TokenState>(() => {
-
-		const token = localStorage.getItem("u:token");
-
-		if (token) {
-			api.defaults.headers.authorization = `Bearer ${token}`;
-
-			return { token };
+	useEffect(() => {
+		const user = getUserLocalStorage();
+		if (user) {
+			setUser(user)
+			api.defaults.headers.authorization = `Bearer ${user.tokenUser}`;
 		}
-
-		return {} as TokenState;
-	});
+	}, [])
 
 
+
+	const handleClick = (data: string) => setUserRole(data)
+	// console.log(userRole)
 
 	const authenticate = async (email: string, password: string) => {
 		try {
@@ -50,11 +50,9 @@ export const AuthProvider = ({ children }: IAuthProvider) => {
 
 			const payload = { tokenUser: response.data, email: decode.email, role: decode.role };
 
-			setToken(tokenCompleted);
 			setUser(payload)
 			setUserLocalStorage(payload)
 
-			console.log(user)
 
 			api.defaults.headers.authorization = `Bearer ${tokenCompleted}`;
 
@@ -73,7 +71,7 @@ export const AuthProvider = ({ children }: IAuthProvider) => {
 
 
 	return (
-		<AuthContext.Provider value={{ ...user, token, authenticate, logout }}>
+		<AuthContext.Provider value={{ ...user, authenticate, logout, userRole, setUserRole, handleClick }}>
 			{children}
 		</AuthContext.Provider>
 	);

@@ -12,16 +12,17 @@ export type User = {
 	mother_name?: string;
 	blood_type?: string;
 	password: string;
+	institution: string;
+	passwordConfirmation?: string;
+	// address: {
+	zip_code: string;
+	country: string;
+	uf: string;
+	city: string;
+	district: string;
+	street: string;
+	number: string;
+	complement: string;
+	// }
 
-	address: {
-		address_id: string;
-		zip_cod: string;
-		country: string;
-		uf: string;
-		city: string;
-		district: string;
-		street: string;
-		number: string;
-		complement: string;
-	}
 }

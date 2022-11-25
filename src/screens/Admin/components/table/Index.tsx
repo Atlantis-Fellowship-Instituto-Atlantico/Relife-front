@@ -21,7 +21,7 @@ interface Props {
 }
 
 export default function TableContent({ header, name, t2, user }: Props) {
-	// console.log(user)
+
 
 	return (
 		<div className='table-content'>
