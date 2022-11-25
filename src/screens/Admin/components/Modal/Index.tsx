@@ -4,7 +4,8 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import "./style.css"
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../../../../context/useAuth';
 // import { AuthContext } from '../../../../context/Auth/AuthContext';
 
 const style = {
@@ -26,9 +27,15 @@ export default function ModalButton() {
 	const handleClose = () => setOpen(false);
 	// const auth = React.useContext(AuthContext);
 
+	const auth = useAuth()
+	const navigate = useNavigate()
+
 	const handleLogout = async () => {
-		// await auth.signout();
+		await auth.logout();
+		navigate("/login")
+		// eslint-disable-next-line no-self-assign
 		// window.location.href = window.location.href;
+
 	}
 
 	return (

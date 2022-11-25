@@ -9,6 +9,7 @@ import "./style.css"
 import { User } from '../../../../Types/User';
 import { useEffect, useState } from 'react';
 import { api } from '../../../../services/api';
+import { Link } from 'react-router-dom';
 
 interface Props {
 	header?: {
@@ -21,7 +22,14 @@ interface Props {
 }
 
 export default function TableContent({ header, name, t2, user }: Props) {
-	// console.log(user)
+
+	// const editTest = async () => {
+	// 	const response = await api.put(`/institutions/users/${cpf}`, {
+	// 		first_name: 'Jane',
+	// 		last_name: 'Doe',
+	// 	});
+	// 	console.log(response.data);
+	// }
 
 	return (
 		<div className='table-content'>
@@ -33,6 +41,7 @@ export default function TableContent({ header, name, t2, user }: Props) {
 						<tr className="header">
 							<th>{header?.name}</th>
 							<th>{header?.t2}</th>
+							<th>Tipo</th>
 							<th>Ação</th>
 						</tr>
 					</thead>
@@ -44,9 +53,11 @@ export default function TableContent({ header, name, t2, user }: Props) {
 									<tr key={user.user_id}>
 										<td>{user.full_name}</td>
 										<td>{user.cpf}</td>
+										<td>{user.role}</td>
+
 										<td>
-											<ModeEditIcon />
-											<DeleteIcon />
+											{/* <Link to={"instituitions/user"}><ModeEditIcon /></Link> */}
+											{/* <DeleteIcon /> */}
 										</td>
 									</tr>
 								)

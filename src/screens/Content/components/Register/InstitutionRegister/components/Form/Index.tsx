@@ -1,39 +1,117 @@
-import { yupResolver } from '@hookform/resolvers/yup';
+
+import { Alert, Snackbar } from '@mui/material';
 import { Box } from '@mui/system'
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import ReactInputMask from 'react-input-mask';
-import * as yup from "yup";
 import { Institution } from '../../../../../../../Types/Institution';
 import "./style.css"
+import { api } from '../../../../../../../services/api';
+import { useNavigate } from 'react-router-dom';
 
 
 
 export const FormInstitution = () => {
+	const [name, setName] = useState("");
+	const [email, setEmail] = useState("");
+	const [cnpj, setCNPJ] = useState("");
+	const [responsibleName, setResponsibleName] = useState("");
+	const [phone, setPhone] = useState("");
+	const [country, setCountry] = useState("");
+	const [password, setPassword] = useState("");
+	const [passwordConfirmed, setPasswordConfirmed] = useState("");
+	const [cep, setCEP] = useState("");
+	const [street, setStreet] = useState("");
+	const [number, setNumber] = useState("");
+	const [complement, setComplement] = useState("");
+	const [city, setCity] = useState("");
+	const [uf, setUF] = useState("");
+	const [district, setDistrict] = useState("");
 
-	const validationSchema = yup.object({
-		name: yup.string().required("Nome é um campo obrigatório"),
-		responsibleName: yup.string().required("Nome é um campo obrigatório"),
-		cnpj: yup.string().required("CNPJ é um campo obrigatório").min(14, "CNPJ necessita de 14 dígitos"),
-		email: yup.string().required("Email é um campo obrigatório").email("E-mail com formato inválido"),
-		phone: yup.string().required("Telefone é um campo obrigatório").min(9, "Telefone necessita de 9 dígitos"),
-		password: yup.string().required("Senha é um campo obrigatório").min(8, "Sua senha necessita no mínimo de 8 dígitos"),
+	const [open, setOpen] = useState(false);
 
-		cep: yup.string().required("CEP é um campo obrigatório").min(8),
-		city: yup.string().required("Cidade é um campo obrigatório"),
-		state: yup.string().required("Estado é um campo obrigatório"),
-		street: yup.string().required("Rua é um campo obrigatório"),
-		Neighborhood: yup.string().required("Bairro é um campo obrigatório"),
+	const [message, setMessage] = useState("");
 
 
-	})
+	const navigate = useNavigate()
 
-	const { register, handleSubmit, resetField, formState: { errors }, reset } = useForm<Institution>({
-		resolver: yupResolver(validationSchema),
+	const { register, handleSubmit, resetField, formState: { errors }, setValue } = useForm<Institution>({
+		mode: "all",
 	});
 
-	const onSubmitHandler = (data: Institution) => {
-		console.log({ data });
-		reset();
+	const handleCheckPostalCode = (data: React.ChangeEvent<HTMLInputElement>) => {
+		const postalCode = data.target.value
+		setCEP(postalCode)
+		if (postalCode?.length !== 8) {
+			setValue('city', '')
+			setValue('uf', '')
+		}
+
+
+		fetch(`https://viacep.com.br/ws/${postalCode}/json/`)
+			.then((response) => response.json())
+			.then((data) => {
+				setValue('city', data.localidade)
+				setValue('uf', data.uf)
+			})
+	}
+	const verificarCampos = async () => {
+		const response = await api.get("/institutions");
+		const data = response.data
+		// eslint-disable-next-line array-callback-return
+		data.map((institution: Institution) => {
+			if (institution.email === email) {
+				setMessage("Email já cadastrado, tente outro!")
+
+			}
+
+			if (institution.cnpj === cnpj) {
+				setMessage("CNPJ já cadastrado, tente outro!")
+			}
+
+			if (institution.phone === phone) {
+				setMessage("Telefone já cadastrado, tente outro!")
+			}
+		})
+	}
+
+	const onSubmitHandler = async (data: Institution) => {
+
+		const user = {
+			role: "INSTITUTION",
+			institution_name: name,
+			responsible_name: responsibleName,
+			cnpj: cnpj,
+			phone: phone,
+			email: email,
+			password: password,
+
+			zip_code: cep,
+			country: country,
+			uf: uf,
+			city: city,
+			district: district,
+			street: street,
+			number: number,
+			complement: complement,
+		}
+
+		console.log("AQUI", user)
+		try {
+			await api.post("/institutions", user)
+			navigate("/dashboard/admin")
+
+		} catch (error) {
+			verificarCampos()
+			setOpen(true)
+		}
+	}
+
+	const handleClose = (event?: React.SyntheticEvent | Event, reason?: string) => {
+		if (reason === 'clickaway') {
+			return;
+		}
+		setOpen(false)
 	};
 
 	return (
@@ -41,17 +119,17 @@ export const FormInstitution = () => {
 			<Box className="info">
 				<Box>
 					<label htmlFor='name'>Nome*</label>
-					<input {...register("name")} placeholder="Nome completo" className="input-text" />
-					<p className="error-message">{errors.name?.message}</p>
+					<input {...register("institution_name", { required: "Nome é um campo obrigatório" })} placeholder="Nome da instituição" onChange={(e) => setName(e.target.value)} className="input-text" />
+					<p className="error-message">{errors.institution_name?.message}</p>
 				</Box>
 				<Box>
-					<label htmlFor='responsibleName'>Nome do responsável*</label>
-					<input {...register("responsibleName")} placeholder="Digite o nome do responsável" className="input-text" />
-					<p className="error-message">{errors.email?.message}</p>
+					<label htmlFor='responsible_name'>Nome do responsável*</label>
+					<input {...register("responsible_name", { required: "Nome do responsável é um campo obrigatório" })} placeholder="Digite o nome do responsável" className="input-text" onChange={(e) => setResponsibleName(e.target.value)} />
+					<p className="error-message">{errors.responsible_name?.message}</p>
 				</Box>
 				<Box>
-					<label htmlFor='cnpj'>CNPJ *</label>
-					<ReactInputMask mask="99.999.999/9999-99" {...register("cnpj")} placeholder="Digite o CNPJ" className="input-text" />
+					<label htmlFor='cnpj'>CNPJ*</label>
+					<ReactInputMask mask="99.999.999/9999-99" {...register("cnpj", { required: "CPNJ é um campo obrigatório", min: 14 })} placeholder="Digite o CNPJ" className="input-text" onChange={(e) => setCNPJ(e.target.value)} />
 					<p className="error-message">{errors.cnpj?.message}</p>
 				</Box>
 
@@ -61,13 +139,20 @@ export const FormInstitution = () => {
 				<Box className="smaller-input">
 					<Box className="label-style">
 						<label htmlFor='email'>Email*</label>
-						<input {...register("email")} placeholder="Ex: email@gmail.com" className="input-text" />
+						<input {...register("email", {
+							required: "Email é um campo obrigatório", pattern: {
+								value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+								message: 'Digite um email válido',
+							}
+						})} placeholder="Ex: email@gmail.com" name="email" className="input-text"
+							onChange={(e) => setEmail(e.target.value)} />
 						<p className="error-message">{errors.email?.message}</p>
 					</Box>
 
 					<Box className="label-style">
 						<label htmlFor='phone'>Telefone*</label>
-						<ReactInputMask mask="(99) 99999-999" {...register("phone")} placeholder="(88)98888-8888" className="input-text" />
+						<ReactInputMask mask="(99) 99999-9999" {...register("phone", { required: "Telefone é um campo obrigatório", min: 11 })} placeholder="(88)98888-8888" className="input-text" onChange={(e) => setPhone(e.target.value)} />
+						<p className="error-message">{errors.phone?.message}</p>
 					</Box>
 				</Box>
 			</Box>
@@ -76,52 +161,53 @@ export const FormInstitution = () => {
 				<Box className="smaller-input">
 					<Box className="label-style">
 						<label htmlFor='country'>Pais*</label>
-						<input {...register("country")} placeholder="Pais" />
+						<input {...register("country", { required: "Pais é um campo obrigatório" })} placeholder="Pais" onChange={(e) => setCountry(e.target.value)} />
+						<p className="error-message">{errors.country?.message}</p>
 					</Box>
 
 					<Box className="label-style">
-						<label htmlFor='cep'>CEP*</label>
-						<ReactInputMask mask="99999-999" {...register("cep")} placeholder="CEP" />
-						<p className="error-message">{errors.cep?.message}</p>
+						<label htmlFor='zip_cod'>CEP*</label>
+						<ReactInputMask mask="99999-999" {...register("zip_code", { required: "CEP é um campo obrigatório", min: 8 })} placeholder="Ex: 00000-000" onChange={(e) => handleCheckPostalCode(e)} />
+						<p className="error-message">{errors.zip_code?.message}</p>
 					</Box>
 				</Box>
 				<Box className="smaller-input">
 					<Box>
 						<Box className="label-style">
 							<label htmlFor='street'>Rua*</label>
-							<input {...register("street")} placeholder="Rua" />
+							<input {...register("street", { required: "Rua é um campo obrigatório" })} placeholder="Rua" onChange={(e) => setStreet(e.target.value)} />
 							<p className="error-message">{errors.street?.message}</p>
 						</Box>
 
 						<Box className="label-style">
 							<label htmlFor='number'>Número</label>
-							<input {...register("number")} placeholder="Número" />
+							<input {...register("number")} placeholder="Número" onChange={(e) => setNumber(e.target.value)} />
 						</Box>
 					</Box>
 				</Box>
 
 				<Box className="smaller-input">
 					<Box className="label-style">
-						<label htmlFor='Neighborhood'>Complemento</label>
-						<input {...register("complement")} placeholder="Complemento" />
+						<label htmlFor='complement'>Complemento</label>
+						<input {...register("complement")} placeholder="Complemento" onChange={(e) => setComplement(e.target.value)} />
 					</Box>
 					<Box className="label-style">
-						<label htmlFor='Neighborhood'>Bairro*</label>
-						<input {...register("Neighborhood")} placeholder="Bairro" />
-						<p className="error-message">{errors.Neighborhood?.message}</p>
+						<label htmlFor='district'>Bairro*</label>
+						<input {...register("district", { required: "Bairro é um campo obrigatório" })} placeholder="Bairro" onChange={(e) => setDistrict(e.target.value)} />
+						<p className="error-message">{errors.district?.message}</p>
 					</Box>
 				</Box>
 
 				<Box className="smaller-input">
 					<Box className="label-style">
 						<label htmlFor='city'>Cidade*</label>
-						<input {...register("city")} placeholder="Cidade" />
+						<input {...register("city", { required: "Cidade é um campo obrigatório" })} placeholder="Cidade" onChange={(e) => setCity(e.target.value)} />
 						<p className="error-message">{errors.city?.message}</p>
 					</Box>
 					<Box className="label-style">
-						<label htmlFor='state'>Estado*</label>
-						<input {...register("state")} placeholder="Estado" />
-						<p className="error-message">{errors.state?.message}</p>
+						<label htmlFor='uf'>Estado*</label>
+						<input {...register("uf", { required: "Estado é um campo obrigatório" })} placeholder="Estado" onChange={(e) => setUF(e.target.value)} />
+						<p className="error-message">{errors.uf?.message}</p>
 					</Box>
 				</Box>
 
@@ -133,20 +219,24 @@ export const FormInstitution = () => {
 						<Box>
 							<Box className="label-style">
 								<label htmlFor='password'>Senha*</label>
-								<input {...register("password")} placeholder="Senha" type="password" />
+								<input {...register("password", { required: "Senha é um campo obrigatório", min: 8 })} placeholder="Senha" type="password" onChange={(e) => setPassword(e.target.value)} />
 								<p className="error-message">{errors.password?.message}</p>
 							</Box>
 							<Box className="label-style">
-								<label htmlFor='state'>Confirme a senha*</label>
-								<input {...register("state")} placeholder="Agora confirme a senha" type="password" />
-								<p className="error-message">{errors.password?.message}</p>
+								<label htmlFor='passwordConfirmation'>Confirme a senha*</label>
+								<input  {...register("passwordConfirmation", { required: true, min: 8 })} placeholder="Agora confirme a senha" type="password" onChange={(e) => setPasswordConfirmed(e.target.value)} />
+								{/* <p className="error-message">{errors.passwordConfirmation?.message}</p> */}
+								{password !== passwordConfirmed && <p className="error-message">As senhas precisam ser iguais</p>}
+
 							</Box>
 						</Box>
 					</Box>
 				</Box>
-
 			</Box>
 			<button type="submit" className='button-submit register'>Cadastrar</button>
+			<Snackbar open={open} autoHideDuration={6000} onClose={handleClose} >
+				<Alert onClose={handleClose} sx={{ width: '100%' }} severity="warning">{message}</Alert>
+			</Snackbar >
 		</form >
 	)
 }

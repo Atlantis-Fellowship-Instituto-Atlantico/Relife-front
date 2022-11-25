@@ -12,6 +12,7 @@ import InstitutionRegister from "./screens/Content/components/Register/Instituti
 
 import InstitutionController from './screens/Admin/InstitutionControle/Index';
 import AdminController from "./screens/Admin/AdminController/Index";
+import { ProtectedLayout } from "./components/ProtectedLayout";
 // import { RequireAuth } from "./context/Auth/RequireAuth";
 
 
@@ -22,14 +23,20 @@ function App() {
 			<Routes>
 				<Route path="/" element={<Home />} />
 				<Route path="/login" element={<FormLogin />} />
-
 				<Route path="/cadastro" element={<CardRegister />} />
 				<Route path="/cadastro/usuario" element={<UserRegister />} />
-				<Route path="/cadastro/admin" element={<FormRegisterAdmin />} />
-				<Route path="/cadastro/instituicao" element={<InstitutionRegister />} />
 
-				<Route path="/dashboard/instituicao" element={<InstitutionController />} />
-				<Route path="/dashboard/admin" element={<AdminController />} />
+				{/* rotas protegidas */}
+
+				<Route path="/cadastro/admin" element={<ProtectedLayout><FormRegisterAdmin /></ProtectedLayout>} />
+
+				<Route path="/cadastro/instituicao" element={<ProtectedLayout><InstitutionRegister /></ProtectedLayout>} />
+
+				<Route path="/dashboard/instituicao" element={<ProtectedLayout><InstitutionController /></ProtectedLayout>} />
+				<Route path="/dashboard/admin" element={<ProtectedLayout><AdminController /></ProtectedLayout>} />
+				{/* <Route path="/dashboard/doador" element={<ProtectedLayout><AdminController /></ProtectedLayout>} />
+				<Route path="/dashboard/receptor" element={<ProtectedLayout><AdminController /></ProtectedLayout>} /> */}
+
 			</Routes>
 
 		</div>

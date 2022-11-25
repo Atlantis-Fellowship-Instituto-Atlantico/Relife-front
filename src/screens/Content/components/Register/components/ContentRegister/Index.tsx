@@ -21,7 +21,7 @@ export default function ContentRegister({ height, top, link, title, subTitle }: 
 		<Box className="container-register" sx={{ height: height }} >
 			<HeaderRegister link={link} title={title} subTitle={subTitle} />
 			<Box className="register-form">
-				<img src={Desenho} alt="Médico sorrindo" className='img-desenho-register' style={{ top: top }} />
+				<img src={Desenho} alt="desenho" className='img-desenho-register' style={{ top: top }} />
 			</Box>
 		</Box >
 
