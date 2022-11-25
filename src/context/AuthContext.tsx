@@ -1,21 +1,15 @@
 import {
 	createContext,
-	useCallback,
 	useEffect,
 	useState,
 } from "react";
-
-import { useNavigate } from "react-router-dom";
-import { api } from "../services/api";
-import { IAuthProvider, IContext, ITokenInfo, IUserData, TokenState } from "./types";
-// import { LoginRequest } from "./util";
-
 import jwt_decode from 'jwt-decode'
+
+import { api } from "../services/api";
+import { IAuthProvider, IContext, ITokenInfo, IUserData } from "./types";
 import { getUserLocalStorage, setUserLocalStorage } from "./util";
 
 export const AuthContext = createContext<IContext>({} as IContext);
-
-
 
 export const AuthProvider = ({ children }: IAuthProvider) => {
 
@@ -32,10 +26,7 @@ export const AuthProvider = ({ children }: IAuthProvider) => {
 		}
 	}, [])
 
-
-
 	const handleClick = (data: string) => setUserRole(data)
-	// console.log(userRole)
 
 	const authenticate = async (email: string, password: string) => {
 		try {
@@ -67,8 +58,6 @@ export const AuthProvider = ({ children }: IAuthProvider) => {
 		setUser(null)
 		setUserLocalStorage(null)
 	}
-
-
 
 	return (
 		<AuthContext.Provider value={{ ...user, authenticate, logout, userRole, setUserRole, handleClick }}>

@@ -1,6 +1,7 @@
 .form-content {
 	display: flex;
 	flex-direction: column;
+	align-items: center;
 
 }
 
@@ -10,14 +11,15 @@
 }
 
 .button-submit {
-	width: 473px;
-	height: 60px;
-	border-radius: 20px;
-
+	margin-top: 1.25rem;
+	width: 29.5625rem;
+	height: 3.75rem;
+	border-radius: 1.25rem;
 	font-weight: bold;
 	font-size: 16px;
 	color: white;
 	background-color: #AED3D1;
+
 }
 
 .button-submit:hover {

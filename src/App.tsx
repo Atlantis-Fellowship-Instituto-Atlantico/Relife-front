@@ -28,11 +28,11 @@ function App() {
 
 				{/* rotas protegidas */}
 
-				<Route path="/cadastro/admin" element={<FormRegisterAdmin />} />
+				<Route path="/cadastro/admin" element={<ProtectedLayout><FormRegisterAdmin /></ProtectedLayout>} />
 
-				<Route path="/cadastro/instituicao" element={<InstitutionRegister />} />
+				<Route path="/cadastro/instituicao" element={<ProtectedLayout><InstitutionRegister /></ProtectedLayout>} />
 
-				<Route path="/dashboard/instituicao" element={<InstitutionController />} />
+				<Route path="/dashboard/instituicao" element={<ProtectedLayout><InstitutionController /></ProtectedLayout>} />
 				<Route path="/dashboard/admin" element={<ProtectedLayout><AdminController /></ProtectedLayout>} />
 				{/* <Route path="/dashboard/doador" element={<ProtectedLayout><AdminController /></ProtectedLayout>} />
 				<Route path="/dashboard/receptor" element={<ProtectedLayout><AdminController /></ProtectedLayout>} /> */}

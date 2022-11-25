@@ -62,8 +62,8 @@ export const UserRegister = () => {
 
 	const navigate = useNavigate()
 
-	const handleCheckPostalCode = (zipCode: React.ChangeEvent<HTMLInputElement>) => {
-		const postalCode = zipCode.target.value
+	const handleCheckPostalCode = (data: React.ChangeEvent<HTMLInputElement>) => {
+		const postalCode = data.target.value
 		setCEP(postalCode)
 		if (postalCode?.length !== 8) {
 			setValue('city', '')
