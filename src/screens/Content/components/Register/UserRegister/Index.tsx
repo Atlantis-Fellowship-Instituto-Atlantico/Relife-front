@@ -12,25 +12,16 @@ import ContentRegister from '../components/ContentRegister/Index';
 import "./style.css"
 
 
-
-
 export const UserRegister = () => {
 
-	const [name, setName] = useState("");
+
 	const [email, setEmail] = useState("");
 	const [cpf, setCPF] = useState("");
-	const [mother, setMother] = useState("");
 	const [phone, setPhone] = useState("");
-	const [country, setCountry] = useState("");
 	const [password, setPassword] = useState("");
 	const [passwordConfirmed, setPasswordConfirmed] = useState("");
-	const [cep, setCEP] = useState("");
-	const [street, setStreet] = useState("");
-	const [number, setNumber] = useState("");
-	const [complement, setComplement] = useState("");
-	const [city, setCity] = useState("");
-	const [uf, setUF] = useState("");
-	const [district, setDistrict] = useState("");
+
+
 
 	const [open, setOpen] = useState(false);
 
@@ -64,7 +55,6 @@ export const UserRegister = () => {
 
 	const handleCheckPostalCode = (data: React.ChangeEvent<HTMLInputElement>) => {
 		const postalCode = data.target.value
-		setCEP(postalCode)
 		if (postalCode?.length !== 8) {
 			setValue('city', '')
 			setValue('uf', '')
@@ -83,22 +73,22 @@ export const UserRegister = () => {
 
 		const user = {
 			role: auth.userRole,
-			full_name: name,
-			sex: selectValue,
-			cpf: cpf,
-			phone: phone,
-			email: email,
-			mother_name: mother,
-			password: password,
+			full_name: data.full_name,
+			sex: data.sex,
+			cpf: data.cpf,
+			phone: data.phone,
+			email: data.email,
+			mother_name: data.mother_name,
+			password: data.password,
 
-			zip_code: cep,
-			country: country,
-			uf: uf,
-			city: city,
-			district: district,
-			street: street,
-			number: number,
-			complement: complement,
+			zip_code: data.zip_code,
+			country: data.country,
+			uf: data.uf,
+			city: data.city,
+			district: data.district,
+			street: data.street,
+			number: data.number,
+			complement: data.complement,
 		}
 
 		console.log("AQUI", user)
@@ -112,12 +102,16 @@ export const UserRegister = () => {
 		}
 	}
 
+
+
 	const handleClose = (event?: React.SyntheticEvent | Event, reason?: string) => {
 		if (reason === 'clickaway') {
 			return;
 		}
 		setOpen(false)
 	};
+
+
 
 	const [selectValue, setSelectValue] = useState("");
 
@@ -138,7 +132,6 @@ export const UserRegister = () => {
 						<input
 							{...register('full_name', { required: "Nome é um campo obrigatório" })}
 							placeholder="Nome completo"
-							onChange={(e) => setName(e.target.value)}
 							className="input-text" />
 						<p className="error-message">{errors.full_name?.message}</p>
 					</Box>
@@ -160,7 +153,7 @@ export const UserRegister = () => {
 					</Box>
 					<Box>
 						<label htmlFor='mother_name'>Nome da mãe</label>
-						<input {...register("mother_name")} placeholder="Digite o nome da sua mãe" className="input-text" onChange={(e) => setMother(e.target.value)} />
+						<input {...register("mother_name")} placeholder="Digite o nome da sua mãe" className="input-text" />
 						<p className="error-message">{errors.mother_name?.message}</p>
 					</Box>
 				</Box>
@@ -188,7 +181,7 @@ export const UserRegister = () => {
 					<Box className="smaller-input">
 						<Box className="label-style">
 							<label htmlFor='country'>Pais*</label>
-							<input {...register("country", { required: "Pais é um campo obrigatório" })} placeholder="Pais" onChange={(e) => setCountry(e.target.value)} />
+							<input {...register("country", { required: "Pais é um campo obrigatório" })} placeholder="Pais" />
 							<p className="error-message">{errors.country?.message}</p>
 						</Box>
 
@@ -202,13 +195,13 @@ export const UserRegister = () => {
 						<Box>
 							<Box className="label-style">
 								<label htmlFor='street'>Rua*</label>
-								<input {...register("street", { required: "Rua é um campo obrigatório" })} placeholder="Rua" onChange={(e) => setStreet(e.target.value)} />
+								<input {...register("street", { required: "Rua é um campo obrigatório" })} placeholder="Rua" />
 								<p className="error-message">{errors.street?.message}</p>
 							</Box>
 
 							<Box className="label-style">
 								<label htmlFor='number'>Número</label>
-								<input {...register("number")} placeholder="Número" onChange={(e) => setNumber(e.target.value)} />
+								<input {...register("number")} placeholder="Número" />
 							</Box>
 						</Box>
 					</Box>
@@ -216,11 +209,11 @@ export const UserRegister = () => {
 					<Box className="smaller-input">
 						<Box className="label-style">
 							<label htmlFor='complement'>Complemento</label>
-							<input {...register("complement")} placeholder="Complemento" onChange={(e) => setComplement(e.target.value)} />
+							<input {...register("complement")} placeholder="Complemento" />
 						</Box>
 						<Box className="label-style">
 							<label htmlFor='district'>Bairro*</label>
-							<input {...register("district", { required: "Bairro é um campo obrigatório" })} placeholder="Bairro" onChange={(e) => setDistrict(e.target.value)} />
+							<input {...register("district", { required: "Bairro é um campo obrigatório" })} placeholder="Bairro" />
 							<p className="error-message">{errors.district?.message}</p>
 						</Box>
 					</Box>
@@ -228,12 +221,12 @@ export const UserRegister = () => {
 					<Box className="smaller-input">
 						<Box className="label-style">
 							<label htmlFor='city'>Cidade*</label>
-							<input {...register("city", { required: "Cidade é um campo obrigatório" })} placeholder="Cidade" onChange={(e) => setCity(e.target.value)} />
+							<input {...register("city", { required: "Cidade é um campo obrigatório" })} placeholder="Cidade" />
 							<p className="error-message">{errors.city?.message}</p>
 						</Box>
 						<Box className="label-style">
 							<label htmlFor='uf'>Estado*</label>
-							<input {...register("uf", { required: "Estado é um campo obrigatório" })} placeholder="Estado" onChange={(e) => setUF(e.target.value)} />
+							<input {...register("uf", { required: "Estado é um campo obrigatório" })} placeholder="Estado" />
 							<p className="error-message">{errors.uf?.message}</p>
 						</Box>
 					</Box>

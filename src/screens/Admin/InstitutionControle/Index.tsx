@@ -13,10 +13,7 @@ import { useAuth } from "../../../context/useAuth";
 
 function InstitutionController() {
 	const [user, setUser] = useState<Array<User>>();
-	// const [user2, setUser2] = useState<Array<User>>();
 
-	// const use = user.
-	// console.log(user)
 	const [loading, setLoading] = useState<boolean>();
 
 	const [search, setSearch] = useState('');
