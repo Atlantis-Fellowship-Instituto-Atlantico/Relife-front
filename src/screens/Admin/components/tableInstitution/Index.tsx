@@ -11,8 +11,7 @@ import { useEffect, useState } from 'react';
 import { api } from '../../../../services/api';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../../../context/useAuth';
-
-
+import { Institution } from '../../../../Types/Institution';
 
 interface Props {
 	header?: {
@@ -21,41 +20,35 @@ interface Props {
 	}
 	name?: string;
 	t2?: string; //vai variar de acordo com a tela, podendo ser cidade ou CPF
-	user?: Array<User> | undefined;
+	user?: Array<Institution> | undefined;
 	isAdmin?: boolean;
+	isInstitution?: boolean;
+
 }
 
-export default function TableContent({ header, name, t2, user, isAdmin }: Props) {
+export default function TableInstitution({ header, name, t2, user, isAdmin, isInstitution }: Props) {
 
 
 	const auth = useAuth()
 	const navigate = useNavigate()
-	const [selectedUser, setSelectedUser] = useState<Array<User>>()
-	const [sangue, setSangue] = useState('');
 
-	console.log(auth.userCPF)
+
+	const [selectedUser, setSelectedUser] = useState<Array<Institution>>()
+	const [itemCopy2, setItemCopy2] = useState<User[] | undefined>();
+
 	const itemCopy = user
-
-	const onDelete = async (index: any, cpf: string) => {
+	const onDelete = async (index: any, id: string) => {
 
 		itemCopy?.splice(index, 1)
-
 		setSelectedUser(itemCopy)
 
-		await api.delete(`/users/${cpf}`, {
+		await api.delete(`/institutions/${id}`, {
 			headers: {
 				'Authorization': `Bearer ${auth.tokenContext}`,
 			},
 			withCredentials: true
 		});
-	}
 
-
-	const updateExport = async (index: any, cpf: string) => {
-
-		await auth.setUserCPF(cpf)
-
-		navigate("/r/editar/usuario")
 	}
 
 	return (
@@ -67,28 +60,30 @@ export default function TableContent({ header, name, t2, user, isAdmin }: Props)
 					<thead>
 						<tr className="header">
 							<th>{header?.name}</th>
+							<th>CNPJ</th>
 							<th>{header?.t2}</th>
-							<th>Tipo</th>
-							<th>Tipo sanguineo</th>
-							<th>Ação</th>
+							<th>Email</th>
+							{isInstitution ? <th style={{ display: "none" }}>Ação</th> : <th>Ação</th>}
 						</tr>
 					</thead>
 
 					<tbody>
 						{
-
-							itemCopy?.map((user: any, index: any) => {
+							itemCopy?.map((institution: Institution, index: any) => {
+								console.log(institution)
 								return (
-									<tr key={user.user_id}>
-										<td>{user.full_name}</td>
-										<td>{user.cpf}</td>
-										<td>{user.role}</td>
-										<td>{user.blood_type}</td>
+									<tr key={institution.institution_id}>
+										<td>{institution.institution_name}</td>
+										<td>{institution.cnpj}</td>
+										<td>{institution.phone}</td>
+										<td>{institution.email}</td>
 
-										<td>
-											{!isAdmin && <ModeEditIcon onClick={() => updateExport(index, user.cpf)} />}
-											{isAdmin && <DeleteIcon onClick={() => onDelete(index, user.cpf)} />}
-										</td>
+
+										{!isInstitution && <td>
+
+											{!isAdmin && !isInstitution && <Link to={"instituitions/user/editar"}><ModeEditIcon /></Link>}
+											{isAdmin ? <DeleteIcon onClick={() => onDelete(index, institution.institution_id)} /> : <DeleteIcon onClick={() => onDelete(index, institution.institution_id)} />}
+										</td>}
 									</tr>
 								)
 							})

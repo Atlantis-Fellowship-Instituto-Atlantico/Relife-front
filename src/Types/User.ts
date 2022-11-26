@@ -1,3 +1,4 @@
+import { Organs } from "./Organs";
 
 
 export type User = {
@@ -12,9 +13,9 @@ export type User = {
 	mother_name?: string;
 	blood_type?: string;
 	password: string;
-	institution: string;
+
 	passwordConfirmation?: string;
-	// address: {
+
 	zip_code: string;
 	country: string;
 	uf: string;
@@ -23,6 +24,9 @@ export type User = {
 	street: string;
 	number: string;
 	complement: string;
-	// }
+
+	institution_id?: string;
+
+	organs?: Organs[];
 
 }

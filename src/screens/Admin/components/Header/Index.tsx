@@ -1,6 +1,7 @@
 import { Box } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Profile from "../../../../assets/profile.svg";
+import { useAuth } from "../../../../context/useAuth";
 import ModalButton from "../Modal/Index";
 import "./style.css";
 interface Props {
@@ -13,8 +14,14 @@ interface Props {
 
 export const Header = ({ sex, name, role = "Usuário" }: Props) => {
 
+	const auth = useAuth()
+	const navigate = useNavigate()
 
+	const handleLogout = async () => {
+		await auth.logout();
+		navigate("/login")
 
+	}
 
 	return (
 		<section className="header-menu-left">
@@ -26,7 +33,7 @@ export const Header = ({ sex, name, role = "Usuário" }: Props) => {
 				</Box>
 			</Box>
 
-			<ModalButton />
+			<ModalButton title="Sair" onClickButton={handleLogout} text="Tem certeza que deseja sair?" />
 		</section>
 	)
 }

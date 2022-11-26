@@ -13,9 +13,13 @@ import InstitutionRegister from "./screens/Content/components/Register/Instituti
 import InstitutionController from './screens/Admin/InstitutionControle/Index';
 import AdminController from "./screens/Admin/AdminController/Index";
 import { ProtectedLayout } from "./components/ProtectedLayout";
+import DonorController from "./screens/Admin/DonorController/Index";
+import { UpdateUserInstitutionRegister } from "./screens/Content/components/UpdateScreen/UpdateUserInstitution/Index";
+import ReceiverController from "./screens/Admin/ReceiverControler/Index";
+import { UpdateUserRegister } from "./screens/Content/components/UpdateScreen/UpdateUser/Index";
 // import { RequireAuth } from "./context/Auth/RequireAuth";
 
-
+// const PrivateRoute = () => ()
 
 function App() {
 	return (
@@ -29,14 +33,14 @@ function App() {
 				{/* rotas protegidas */}
 
 				<Route path="/cadastro/admin" element={<ProtectedLayout><FormRegisterAdmin /></ProtectedLayout>} />
-
 				<Route path="/cadastro/instituicao" element={<ProtectedLayout><InstitutionRegister /></ProtectedLayout>} />
 
 				<Route path="/dashboard/instituicao" element={<ProtectedLayout><InstitutionController /></ProtectedLayout>} />
 				<Route path="/dashboard/admin" element={<ProtectedLayout><AdminController /></ProtectedLayout>} />
-				{/* <Route path="/dashboard/doador" element={<ProtectedLayout><AdminController /></ProtectedLayout>} />
-				<Route path="/dashboard/receptor" element={<ProtectedLayout><AdminController /></ProtectedLayout>} /> */}
-
+				<Route path="/dashboard/doador" element={<ProtectedLayout><DonorController /></ProtectedLayout>} />
+				<Route path="/r/editar/usuario" element={<UpdateUserInstitutionRegister />} />
+				<Route path="/dashboard/receptor" element={<ReceiverController />} />
+				<Route path="/editar/usuario" element={<UpdateUserRegister />} />
 			</Routes>
 
 		</div>

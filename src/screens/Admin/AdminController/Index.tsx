@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import "./style.css";
 
@@ -8,25 +8,67 @@ import { Header } from "../components/Header/Index";
 import { ProgressBar } from "../components/ProgressBar/Index";
 import { Aside } from "../components/Aside/Index";
 import { useAuth } from '../../../context/useAuth';
+import { api } from '../../../services/api';
+import { useNavigate } from "react-router-dom";
+import TableContent from '../components/table/Index';
+import { User } from "../../../Types/User";
+import { ButtonFilter } from "../components/table/components/ButtonFilter/Index";
+import { Skeletons } from "../InstitutionControle/Skeleton";
+import TableInstitution from "../components/tableInstitution/Index";
+// import { Skeletons } from '../InstitutionControle/Skeleton/index';
 
 function AdminController() {
 
-	const auth = useAuth()
 
+	const [search, setSearch] = useState('');
+	const [clickTable, setClickTable] = useState<boolean>(true);
+
+
+	const [name, setName] = useState<string | undefined>('')
+
+	const auth = useAuth();
+	const navigate = useNavigate();
+
+
+	useEffect(() => {
+		const email = auth.email
+		setName(email)
+
+	}, [auth.email])
+
+
+	const filterUser = auth.resultUser?.filter(user => user.cpf?.startsWith(search));
+	const filterInstitution = auth.institutionResult?.filter(user => user.institution_name?.startsWith(search));
+
+	const buttonClickUser = () => {
+		setClickTable(true)
+	}
+	const buttonClickUser2 = () => {
+		setClickTable(false)
+	}
+
+	const deleteUser = async () => {
+		await api.delete(`/69ed90c76a11b9a7ee11467ef09503dbec35dbc7be84ba664a098c859416228b/${auth.email}`);
+		auth.setUserLocalStorage(null)
+		navigate("/login")
+	};
+
+
+	console.log(clickTable)
 	return (
 		<Box className="body">
 			<Box className="content">
 				<Box className="submenu">
-					<Header role="Admin" name={auth.email} />
-					<ProgressBar />
+					<Header role="Admin" name={name} />
+					{/* <ProgressBar /> */}
+					<ButtonFilter placeholder="Digite o CPF do usuário" isInputActive={true} buttonOne="Usuários" buttonTwo="Instituições" valueInput={search} isButtonActiveTree={false} onChange={(e) => setSearch(e.target.value.toLowerCase())} onClickButtonOne={buttonClickUser} onClickButtonTwo={buttonClickUser2} />
+					{!auth.loading && <Skeletons />}
+					{clickTable ? <TableContent header={{ name: "Nome", t2: "CPF" }} user={filterUser} isAdmin /> : <TableInstitution header={{ name: "Nome", t2: "Telefone" }} user={filterInstitution} isAdmin />}
 				</Box>
-				<Aside subTitleOne="Admin" subTitleTwo="Adicionar instituição" />
+				<Aside subTitleOne="Home" subTitleTwo="Cadastrar instituição" isIconActive={false} onClickButton={deleteUser} />
 			</Box>
 		</Box>
 	);
 }
-
-// 			<Link to="/cadastro/instituicao">
-// <Link to="/editar/instituicao:id">
 
 export default AdminController;

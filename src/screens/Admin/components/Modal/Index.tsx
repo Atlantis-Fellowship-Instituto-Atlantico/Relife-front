@@ -20,7 +20,13 @@ const style = {
 	p: 4,
 };
 
-export default function ModalButton() {
+
+interface IOutData {
+	text: string;
+	onClickButton?: React.MouseEventHandler<HTMLButtonElement>;
+	title: string;
+}
+export default function ModalButton({ onClickButton, text, title }: IOutData) {
 
 	const [open, setOpen] = React.useState(false);
 	const handleOpen = () => setOpen(true);
@@ -41,7 +47,7 @@ export default function ModalButton() {
 	return (
 		<Box>
 			<button onClick={handleOpen} className="button-article">
-				<strong>Sair</strong>
+				<strong>{title}</strong>
 			</button>
 			<Modal
 				open={open}
@@ -51,13 +57,13 @@ export default function ModalButton() {
 			>
 				<Box sx={style}>
 					<Typography id="modal-modal-title" variant="h6" component="h2">
-						Tem certeza que deseja sair?
+						{text}
 					</Typography>
 					<Box className="style-modal">
 						<button className="button-style-modal cancel" onClick={handleClose}>
 							Cancelar
 						</button>
-						<button onClick={handleLogout} className="button-style-modal exit">Sair</button>
+						<button onClick={onClickButton} className="button-style-modal exit">Sair</button>
 					</Box>
 				</Box>
 			</Modal>

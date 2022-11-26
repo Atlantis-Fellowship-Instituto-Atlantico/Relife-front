@@ -159,7 +159,7 @@ export const UserContextProvider = ({ children }: UserContextProps) => {
 
 		const user = {
 			bloodType: data.blood_type,
-			institution: data.institution
+			institution: data.institution_id
 		}
 
 		console.log("AQUI", user)
@@ -173,6 +173,7 @@ export const UserContextProvider = ({ children }: UserContextProps) => {
 
 	const deleteUser = async () => {
 		await api.delete(`/users/${selectedUser}`);
+		auth.setUserLocalStorage(null)
 		console.log("delete")
 	};
 

@@ -1,25 +1,46 @@
 
 import { Alert, Snackbar } from '@mui/material';
 import { Box } from '@mui/system'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import ReactInputMask from 'react-input-mask';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../../../../context/useAuth';
 import { api } from '../../../../../services/api';
 import { User } from '../../../../../Types/User';
-import ContentRegister from '../components/ContentRegister/Index';
+import ContentRegister from '../../Register/components/ContentRegister/Index';
+// import ContentRegister from '../components/ContentRegister/Index';
 import "./style.css"
 
 
-export const UserRegister = () => {
+export const UpdateUserRegister = () => {
 
-
+	const [name, setName] = useState("");
 	const [email, setEmail] = useState("");
-	const [cpf, setCPF] = useState("");
+
+	const [mother, setMother] = useState("");
 	const [phone, setPhone] = useState("");
+	const [country, setCountry] = useState("");
 	const [password, setPassword] = useState("");
+
+	const [cpf, setCpf] = useState("");
 	const [passwordConfirmed, setPasswordConfirmed] = useState("");
+	const [cep, setCEP] = useState("");
+
+
+	const [street, setStreet] = useState("");
+	const [number, setNumber] = useState("");
+	const [complement, setComplement] = useState("");
+	const [city, setCity] = useState("");
+	const [uf, setUF] = useState("");
+	const [district, setDistrict] = useState("");
+
+
+	// const [email, setEmail] = useState("");
+	// const [cpf, setCPF] = useState("");
+	// const [phone, setPhone] = useState("");
+	// const [password, setPassword] = useState("");
+	// const [passwordConfirmed, setPasswordConfirmed] = useState("");
 
 
 
@@ -68,6 +89,18 @@ export const UserRegister = () => {
 				setValue('uf', data.uf)
 			})
 	}
+
+	const getInstitutions = async () => {
+		const response = await api.get("/institutions")
+
+		setName(response.data.full_name)
+		console.log("DATA", response.data.full_name)
+	};
+
+	useEffect(() => {
+		getInstitutions()
+	}, [])
+
 
 	const updateUser = async (data: User) => {
 
@@ -143,12 +176,7 @@ export const UserRegister = () => {
 	console.log(auth.id)
 	const onSubmitHandler = async (data: User) => {
 
-		if (auth.id === undefined) {
-			createUser(data)
-		} else {
-			updateUser(data)
-		}
-
+		updateUser(data)
 	}
 
 
@@ -171,6 +199,7 @@ export const UserRegister = () => {
 		{ id: 4, name: 'Prefiro não dizer' },
 	];
 
+
 	return (
 		<Box className="content-main-form ">
 			<ContentRegister height={"100rem"} top={"18.75rem"} />
@@ -181,28 +210,28 @@ export const UserRegister = () => {
 						<input
 							{...register('full_name', { required: "Nome é um campo obrigatório" })}
 							placeholder="Nome completo"
-							className="input-text" />
+							className="input-text" value={name} />
 						<p className="error-message">{errors.full_name?.message}</p>
 					</Box>
 					<Box>
 						<label htmlFor='email'>Email *</label>
 						<input {...register("email", {
-							required: "Email é um campo obrigatório", pattern: {
+							pattern: {
 								value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
 								message: 'Digite um email válido',
 							}
 						})} placeholder="Ex: email@gmail.com" name="email" className="input-text"
-							onChange={(e) => setEmail(e.target.value)} />
+							value={email} />
 						<p className="error-message">{errors.email?.message}</p>
 					</Box>
 					<Box>
 						<label htmlFor='cpf'>CPF *</label>
-						<ReactInputMask mask="999.999.999-99" {...register("cpf", { required: "CPF é um campo obrigatório", min: 11 })} placeholder="CPF" className="input-text" onChange={(e) => setCPF(e.target.value)} />
+						<ReactInputMask mask="999.999.999-99" {...register("cpf")} placeholder="CPF" className="input-text" onChange={(e) => setCpf(e.target.value)} value={cpf} />
 						<p className="error-message">{errors.cpf?.message}</p>
 					</Box>
 					<Box>
 						<label htmlFor='mother_name'>Nome da mãe</label>
-						<input {...register("mother_name")} placeholder="Digite o nome da sua mãe" className="input-text" />
+						<input {...register("mother_name")} placeholder="Digite o nome da sua mãe" className="input-text" value={mother} />
 						<p className="error-message">{errors.mother_name?.message}</p>
 					</Box>
 				</Box>
@@ -221,7 +250,7 @@ export const UserRegister = () => {
 
 						<Box className="label-style">
 							<label htmlFor='phone'>Telefone*</label>
-							<ReactInputMask mask="(99) 99999-9999" {...register("phone", { required: "Telefone é um campo obrigatório", min: 11 })} placeholder="(88)98888-8888" className="input-text" onChange={(e) => setPhone(e.target.value)} />
+							<ReactInputMask mask="(99) 99999-9999" {...register("phone")} placeholder="(88)98888-8888" className="input-text" value={phone} />
 							<p className="error-message">{errors.phone?.message}</p>
 						</Box>
 					</Box>
@@ -230,13 +259,13 @@ export const UserRegister = () => {
 					<Box className="smaller-input">
 						<Box className="label-style">
 							<label htmlFor='country'>Pais*</label>
-							<input {...register("country", { required: "Pais é um campo obrigatório" })} placeholder="Pais" />
+							<input {...register("country")} placeholder="Pais" value={country} />
 							<p className="error-message">{errors.country?.message}</p>
 						</Box>
 
 						<Box className="label-style">
 							<label htmlFor='zip_cod'>CEP*</label>
-							<ReactInputMask mask="99999-999" {...register("zip_code", { required: "CEP é um campo obrigatório", min: 8 })} placeholder="Ex: 00000-000" onChange={(e) => handleCheckPostalCode(e)} />
+							<ReactInputMask mask="99999-999" {...register("zip_code")} placeholder="Ex: 00000-000" value={cep} />
 							<p className="error-message">{errors.zip_code?.message}</p>
 						</Box>
 					</Box>
@@ -244,13 +273,13 @@ export const UserRegister = () => {
 						<Box>
 							<Box className="label-style">
 								<label htmlFor='street'>Rua*</label>
-								<input {...register("street", { required: "Rua é um campo obrigatório" })} placeholder="Rua" />
+								<input {...register("street")} placeholder="Rua" value={street} />
 								<p className="error-message">{errors.street?.message}</p>
 							</Box>
 
 							<Box className="label-style">
 								<label htmlFor='number'>Número</label>
-								<input {...register("number")} placeholder="Número" />
+								<input {...register("number")} placeholder="Número" value={number} />
 							</Box>
 						</Box>
 					</Box>
@@ -258,11 +287,11 @@ export const UserRegister = () => {
 					<Box className="smaller-input">
 						<Box className="label-style">
 							<label htmlFor='complement'>Complemento</label>
-							<input {...register("complement")} placeholder="Complemento" />
+							<input {...register("complement")} placeholder="Complemento" value={complement} />
 						</Box>
 						<Box className="label-style">
 							<label htmlFor='district'>Bairro*</label>
-							<input {...register("district", { required: "Bairro é um campo obrigatório" })} placeholder="Bairro" />
+							<input {...register("district")} placeholder="Bairro" value={district} />
 							<p className="error-message">{errors.district?.message}</p>
 						</Box>
 					</Box>
@@ -270,12 +299,12 @@ export const UserRegister = () => {
 					<Box className="smaller-input">
 						<Box className="label-style">
 							<label htmlFor='city'>Cidade*</label>
-							<input {...register("city", { required: "Cidade é um campo obrigatório" })} placeholder="Cidade" />
+							<input {...register("city")} placeholder="Cidade" value={city} />
 							<p className="error-message">{errors.city?.message}</p>
 						</Box>
 						<Box className="label-style">
 							<label htmlFor='uf'>Estado*</label>
-							<input {...register("uf", { required: "Estado é um campo obrigatório" })} placeholder="Estado" />
+							<input {...register("uf")} placeholder="Estado" value={uf} />
 							<p className="error-message">{errors.uf?.message}</p>
 						</Box>
 					</Box>
@@ -284,16 +313,15 @@ export const UserRegister = () => {
 						<Box className="password-box">
 							<h3>Para concluir o cadastro crie uma senha</h3>
 							<p className='description-password'>(aconselhamos usar letras e números para maior segurança da sua conta)</p>
-
 							<Box>
 								<Box className="label-style">
 									<label htmlFor='password'>Senha*</label>
-									<input {...register("password", { required: "Senha é um campo obrigatório", min: 8 })} placeholder="Senha" type="password" onChange={(e) => setPassword(e.target.value)} />
+									<input {...register("password")} placeholder="Senha" type="password" onChange={(e) => setPassword(e.target.value)} />
 									<p className="error-message">{errors.password?.message}</p>
 								</Box>
 								<Box className="label-style">
 									<label htmlFor='passwordConfirmation'>Confirme a senha*</label>
-									<input  {...register("passwordConfirmation", { required: true, min: 8 })} placeholder="Agora confirme a senha" type="password" onChange={(e) => setPasswordConfirmed(e.target.value)} />
+									<input  {...register("passwordConfirmation")} placeholder="Agora confirme a senha" type="password" onChange={(e) => setPasswordConfirmed(e.target.value)} />
 									{/* <p className="error-message">{errors.passwordConfirmation?.message}</p> */}
 									{password !== passwordConfirmed && <p className="error-message">As senhas precisam ser iguais</p>}
 

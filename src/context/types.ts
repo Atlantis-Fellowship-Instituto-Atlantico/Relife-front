@@ -1,3 +1,5 @@
+import { Institution } from "../Types/Institution";
+import { User } from "../Types/User";
 
 export interface ITokenInfo {
 	id: string;
@@ -13,19 +15,31 @@ export interface TokenState {
 
 
 export interface IUserData {
+	id?: string;
 	email?: string;
-	token?: TokenState;
+	tokenResult?: string;
 	role?: string;
 }
 
 
 export interface IContext extends IUserData {
-	// token: TokenState;
+	tokenContext: string;
 	authenticate(email: string, password: string): Promise<void>;
 	logout(): void;
 	userRole: string;
 	setUserRole: React.Dispatch<React.SetStateAction<string>>;
-	handleClick: (data: string) => void
+	handleClick: (data: string) => void;
+	setUserLocalStorage: (user: IUserData | null) => void;
+	resultUser: User[] | undefined;
+	setResultUser: React.Dispatch<React.SetStateAction<User[]>>;
+	loading: boolean | undefined;
+	setLoading: React.Dispatch<React.SetStateAction<boolean | undefined>>;
+	institutionResult: Institution[] | undefined;
+	setInstitutionResult: React.Dispatch<React.SetStateAction<Institution[] | undefined>>;
+	userCPF: string;
+	setUserCPF: React.Dispatch<React.SetStateAction<string>>;
+	setSelectValue: React.Dispatch<React.SetStateAction<string>>;
+	selectValue: string;
 	// userLogged(): boolean;
 }
 

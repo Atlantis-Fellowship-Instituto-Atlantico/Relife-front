@@ -8,6 +8,7 @@ import { Institution } from '../../../../../../../Types/Institution';
 import "./style.css"
 import { api } from '../../../../../../../services/api';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../../../../../../context/useAuth';
 
 
 
@@ -75,6 +76,8 @@ export const FormInstitution = () => {
 		})
 	}
 
+	const auth = useAuth()
+
 	const onSubmitHandler = async (data: Institution) => {
 
 		const user = {
@@ -96,10 +99,10 @@ export const FormInstitution = () => {
 			complement: complement,
 		}
 
-		console.log("AQUI", user)
 		try {
-			await api.post("/institutions", user)
+			const response = await api.post("/institutions", user)
 			navigate("/dashboard/admin")
+			// auth.setAddNewInstitution(response.data)
 
 		} catch (error) {
 			verificarCampos()
