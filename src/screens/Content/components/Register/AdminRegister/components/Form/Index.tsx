@@ -1,9 +1,9 @@
-import { yupResolver } from '@hookform/resolvers/yup';
+
 import { Box } from '@mui/system'
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import ReactInputMask from 'react-input-mask';
-import * as yup from "yup";
+
 import { Admin } from '../../../../../../../Types/Admin';
 import "./style.css"
 import { api } from '../../../../../../../services/api';
@@ -15,7 +15,7 @@ import { Alert, Snackbar } from '@mui/material';
 export const FormAdmin = () => {
 
 
-	const { register, handleSubmit, formState: { errors }, reset } = useForm<Admin>({
+	const { register, handleSubmit, formState: { errors } } = useForm<Admin>({
 		mode: "all",
 	});
 
@@ -55,7 +55,6 @@ export const FormAdmin = () => {
 			password: password,
 		}
 
-		console.log("AQUI", user)
 		try {
 			await api.post("/69ed90c76a11b9a7ee11467ef09503dbec35dbc7be84ba664a098c859416228b", user)
 			navigate("/dashboard/admin")

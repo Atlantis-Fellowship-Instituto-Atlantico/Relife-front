@@ -31,7 +31,6 @@ export const FormLogin = () => {
 
 	const handleEmailInput = (event: ChangeEvent<HTMLInputElement>) => {
 		setEmail(event.target.value);
-		console.log(email)
 	}
 
 	const handlePasswordInput = (event: ChangeEvent<HTMLInputElement>) => {
@@ -53,7 +52,6 @@ export const FormLogin = () => {
 
 		try {
 			await auth.authenticate(email, password)
-			console.log("ROLE ", auth.role)
 
 			if (auth.role === "ADMIN") {
 				return navigate("/dashboard/admin");

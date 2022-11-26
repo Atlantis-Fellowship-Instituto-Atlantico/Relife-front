@@ -59,6 +59,7 @@ export const FormInstitution = () => {
 	const verificarCampos = async () => {
 		const response = await api.get("/institutions");
 		const data = response.data
+
 		// eslint-disable-next-line array-callback-return
 		data.map((institution: Institution) => {
 			if (institution.email === email) {

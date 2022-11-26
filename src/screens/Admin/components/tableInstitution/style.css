@@ -17,23 +17,18 @@ td {
 	text-decoration: center;
 }
 
-/* tr {
-	display: flex;
-	align-items: center;
-	justify-content: space-around;
-	/* flex-direction: column; */
-/* }  */
+
 
 table {
 	margin-top: 1rem;
 	border-spacing: 0;
-	width: 100%;
+	/* width: 100%; */
 }
 
 thead,
 tbody {
 	display: block;
-	width: 100%;
+	/* width: 100%; */
 
 }
 
@@ -56,16 +51,17 @@ tbody::-webkit-scrollbar-thumb {
 }
 
 .header {
-	height: 70px;
+	height: 60px;
 }
+
 
 
 .table td {
-	width: 10%;
+	width: 1%;
 }
 
 .table th {
-	width: 10px;
+	/* width: 10px; */
 	width: 1%;
 
 }

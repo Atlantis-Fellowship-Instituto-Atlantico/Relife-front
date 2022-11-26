@@ -12,7 +12,7 @@ import { api } from '../../../../services/api';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../../../context/useAuth';
 import { Institution } from '../../../../Types/Institution';
-
+import "./style.css"
 interface Props {
 	header?: {
 		name: string;
@@ -60,7 +60,7 @@ export default function TableInstitution({ header, name, t2, user, isAdmin, isIn
 					<thead>
 						<tr className="header">
 							<th>{header?.name}</th>
-							<th>CNPJ</th>
+							<th>Cidade</th>
 							<th>{header?.t2}</th>
 							<th>Email</th>
 							{isInstitution ? <th style={{ display: "none" }}>Ação</th> : <th>Ação</th>}
@@ -69,14 +69,15 @@ export default function TableInstitution({ header, name, t2, user, isAdmin, isIn
 
 					<tbody>
 						{
-							itemCopy?.map((institution: Institution, index: any) => {
-								console.log(institution)
+							itemCopy?.map((institution: any, index: any) => {
+
 								return (
 									<tr key={institution.institution_id}>
 										<td>{institution.institution_name}</td>
-										<td>{institution.cnpj}</td>
+										<td>{institution.address.city}</td>
 										<td>{institution.phone}</td>
 										<td>{institution.email}</td>
+										{/* <td>Cidade</td> */}
 
 
 										{!isInstitution && <td>

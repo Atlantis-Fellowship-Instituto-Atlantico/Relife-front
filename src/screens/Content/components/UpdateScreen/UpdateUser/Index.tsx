@@ -24,6 +24,8 @@ export const UpdateUserRegister = () => {
 	const [password, setPassword] = useState("");
 
 	const [cpf, setCpf] = useState("");
+	const [CPF, setCPF] = useState("");
+
 	const [passwordConfirmed, setPasswordConfirmed] = useState("");
 	const [cep, setCEP] = useState("");
 
@@ -52,25 +54,7 @@ export const UpdateUserRegister = () => {
 
 	const { register, handleSubmit, formState: { errors }, setValue } = useForm<User>({ mode: 'all' });
 
-	const verificarCampos = async () => {
-		const response = await api.get("/users");
-		const data = response.data
-		// eslint-disable-next-line array-callback-return
-		data.map((user: User) => {
-			if (user.email === email) {
-				setMessage("Email já cadastrado, tente outro!")
 
-			}
-
-			if (user.cpf === cpf) {
-				setMessage("CPF já cadastrado, tente outro!")
-			}
-
-			if (user.phone === phone) {
-				setMessage("Telefone já cadastrado, tente outro!")
-			}
-		})
-	}
 
 	const navigate = useNavigate()
 
@@ -90,16 +74,7 @@ export const UpdateUserRegister = () => {
 			})
 	}
 
-	const getInstitutions = async () => {
-		const response = await api.get("/institutions")
 
-		setName(response.data.full_name)
-		console.log("DATA", response.data.full_name)
-	};
-
-	useEffect(() => {
-		getInstitutions()
-	}, [])
 
 
 	const updateUser = async (data: User) => {
@@ -124,7 +99,7 @@ export const UpdateUserRegister = () => {
 			complement: data.complement,
 		}
 
-		console.log("AQUI", user)
+
 		try {
 			await api.put(`/users/${auth.id}`, user)
 
@@ -139,47 +114,34 @@ export const UpdateUserRegister = () => {
 
 		}
 	}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	const getRegister = async () => {
+		const response = await api.get(`users/registers/${auth?.id}`)
+		const data = response.data
+		setName(data.full_name)
+		setEmail(data.email)
+		setPhone(data.phone)
+		setCEP(data.address.zip_code)
+		setCity(data.address.city)
+		setDistrict(data.address.district)
+		setStreet(data.address.street)
+		setUF(data.address.uf)
+		setComplement(data.address.complement)
+		setNumber(data.address.number)
+		setCountry(data.address.country)
+		setCPF(data.cpf)
 
-	const createUser = async (data: User) => {
+	};
 
-		const user = {
-			role: auth.userRole,
-			full_name: data.full_name,
-			sex: data.sex,
-			cpf: data.cpf,
-			phone: data.phone,
-			email: data.email,
-			mother_name: data.mother_name,
-			password: data.password,
+	useEffect(() => {
+		getRegister()
+	}, [getRegister])
 
-			zip_code: data.zip_code,
-			country: data.country,
-			uf: data.uf,
-			city: data.city,
-			district: data.district,
-			street: data.street,
-			number: data.number,
-			complement: data.complement,
-		}
 
-		console.log("AQUI", user)
-		try {
-			await api.post("/users", user)
-			navigate("/login")
-
-		} catch (error) {
-			verificarCampos()
-			setOpen(true)
-		}
-	}
-
-	console.log(auth.id)
 	const onSubmitHandler = async (data: User) => {
 
 		updateUser(data)
 	}
-
-
 
 	const handleClose = (event?: React.SyntheticEvent | Event, reason?: string) => {
 		if (reason === 'clickaway') {
@@ -187,7 +149,6 @@ export const UpdateUserRegister = () => {
 		}
 		setOpen(false)
 	};
-
 
 
 	const [selectValue, setSelectValue] = useState("");
@@ -202,15 +163,15 @@ export const UpdateUserRegister = () => {
 
 	return (
 		<Box className="content-main-form ">
-			<ContentRegister height={"100rem"} top={"18.75rem"} />
+			<ContentRegister height={"100rem"} top={"18.75rem"} title="Editar" link='' />
 			<form onSubmit={handleSubmit(onSubmitHandler)} className="form-register">
 				<Box className="info">
 					<Box>
 						<label htmlFor='full_name'>Nome *</label>
 						<input
-							{...register('full_name', { required: "Nome é um campo obrigatório" })}
-							placeholder="Nome completo"
-							className="input-text" value={name} />
+							{...register('full_name')}
+							placeholder={name}
+							className="input-text" onChange={(e) => setName(e.target.value)} />
 						<p className="error-message">{errors.full_name?.message}</p>
 					</Box>
 					<Box>
@@ -220,18 +181,17 @@ export const UpdateUserRegister = () => {
 								value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
 								message: 'Digite um email válido',
 							}
-						})} placeholder="Ex: email@gmail.com" name="email" className="input-text"
-							value={email} />
+						})} className="input-text" placeholder={email} />
 						<p className="error-message">{errors.email?.message}</p>
 					</Box>
 					<Box>
 						<label htmlFor='cpf'>CPF *</label>
-						<ReactInputMask mask="999.999.999-99" {...register("cpf")} placeholder="CPF" className="input-text" onChange={(e) => setCpf(e.target.value)} value={cpf} />
+						<ReactInputMask mask="999.999.999-99" {...register("cpf")} className="input-text" onChange={(e) => setCpf(e.target.value)} placeholder={CPF} />
 						<p className="error-message">{errors.cpf?.message}</p>
 					</Box>
 					<Box>
 						<label htmlFor='mother_name'>Nome da mãe</label>
-						<input {...register("mother_name")} placeholder="Digite o nome da sua mãe" className="input-text" value={mother} />
+						<input {...register("mother_name")} placeholder={mother} className="input-text" value={mother} />
 						<p className="error-message">{errors.mother_name?.message}</p>
 					</Box>
 				</Box>
@@ -250,7 +210,7 @@ export const UpdateUserRegister = () => {
 
 						<Box className="label-style">
 							<label htmlFor='phone'>Telefone*</label>
-							<ReactInputMask mask="(99) 99999-9999" {...register("phone")} placeholder="(88)98888-8888" className="input-text" value={phone} />
+							<ReactInputMask mask="(99) 99999-9999" {...register("phone")} className="input-text" placeholder={phone} />
 							<p className="error-message">{errors.phone?.message}</p>
 						</Box>
 					</Box>
@@ -259,13 +219,13 @@ export const UpdateUserRegister = () => {
 					<Box className="smaller-input">
 						<Box className="label-style">
 							<label htmlFor='country'>Pais*</label>
-							<input {...register("country")} placeholder="Pais" value={country} />
+							<input {...register("country")} placeholder={country} />
 							<p className="error-message">{errors.country?.message}</p>
 						</Box>
 
 						<Box className="label-style">
 							<label htmlFor='zip_cod'>CEP*</label>
-							<ReactInputMask mask="99999-999" {...register("zip_code")} placeholder="Ex: 00000-000" value={cep} />
+							<ReactInputMask mask="99999-999" {...register("zip_code")} placeholder={cep} />
 							<p className="error-message">{errors.zip_code?.message}</p>
 						</Box>
 					</Box>
@@ -273,13 +233,13 @@ export const UpdateUserRegister = () => {
 						<Box>
 							<Box className="label-style">
 								<label htmlFor='street'>Rua*</label>
-								<input {...register("street")} placeholder="Rua" value={street} />
+								<input {...register("street")} placeholder={street} />
 								<p className="error-message">{errors.street?.message}</p>
 							</Box>
 
 							<Box className="label-style">
 								<label htmlFor='number'>Número</label>
-								<input {...register("number")} placeholder="Número" value={number} />
+								<input {...register("number")} placeholder={number} />
 							</Box>
 						</Box>
 					</Box>
@@ -287,11 +247,11 @@ export const UpdateUserRegister = () => {
 					<Box className="smaller-input">
 						<Box className="label-style">
 							<label htmlFor='complement'>Complemento</label>
-							<input {...register("complement")} placeholder="Complemento" value={complement} />
+							<input {...register("complement")} placeholder={complement} />
 						</Box>
 						<Box className="label-style">
 							<label htmlFor='district'>Bairro*</label>
-							<input {...register("district")} placeholder="Bairro" value={district} />
+							<input {...register("district")} placeholder={district} />
 							<p className="error-message">{errors.district?.message}</p>
 						</Box>
 					</Box>
@@ -299,12 +259,12 @@ export const UpdateUserRegister = () => {
 					<Box className="smaller-input">
 						<Box className="label-style">
 							<label htmlFor='city'>Cidade*</label>
-							<input {...register("city")} placeholder="Cidade" value={city} />
+							<input {...register("city")} placeholder={city} />
 							<p className="error-message">{errors.city?.message}</p>
 						</Box>
 						<Box className="label-style">
 							<label htmlFor='uf'>Estado*</label>
-							<input {...register("uf")} placeholder="Estado" value={uf} />
+							<input {...register("uf")} placeholder={uf} />
 							<p className="error-message">{errors.uf?.message}</p>
 						</Box>
 					</Box>

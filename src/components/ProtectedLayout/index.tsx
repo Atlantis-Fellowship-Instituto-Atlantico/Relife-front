@@ -20,24 +20,24 @@ export const ProtectedLayout = ({ children }: { children: JSX.Element }) => {
 		)
 	}
 
-	if (auth.role === "ADMIN") {
-		navigate("/dashboard/admin")
-	} else {
-		navigate("/login")
+	// if (auth.role === "ADMIN") {
+	// 	navigate("/dashboard/admin")
+	// } else {
+	// 	navigate("/login")
 
-	}
+	// }
 
-	if (auth.role === "INSTITUTION") {
-		navigate("/dashboard/instituicao")
-	}
+	// if (auth.role === "INSTITUTION") {
+	// 	navigate("/dashboard/instituicao")
+	// }
 
-	if (auth.role === "DONOR") {
-		navigate("/dashboard/doador")
-	}
+	// if (auth.role === "DONOR") {
+	// 	navigate("/dashboard/doador")
+	// }
 
-	if (auth.role === "RECEIVER") {
-		navigate("/dashboard/receptor")
-	}
+	// if (auth.role === "RECEIVER") {
+	// 	navigate("/dashboard/receptor")
+	// }
 
 
 	return children

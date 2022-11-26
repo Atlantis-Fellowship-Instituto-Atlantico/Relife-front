@@ -32,7 +32,6 @@ export const AuthProvider = ({ children }: IAuthProvider) => {
 			setTokenContext(user.tokenUser)
 			setUser(user)
 			api.defaults.headers.authorization = `Bearer ${user.tokenUser}`;
-			console.log(user.tokenUser)
 		}
 	}, [])
 
@@ -73,7 +72,6 @@ export const AuthProvider = ({ children }: IAuthProvider) => {
 		const response = await api.get("/users")
 		setResultUser(response.data)
 		setLoading(true)
-		// window.location.href = window.location.href
 	};
 
 
@@ -81,23 +79,24 @@ export const AuthProvider = ({ children }: IAuthProvider) => {
 		getUsers()
 	}, [])
 
-	///register/:user_id
 
 	const [institutionResult, setInstitutionResult] = useState<Array<Institution>>()
 
 
 
+
+
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	const getRegister = async () => {
-		const response = await api.get(`users/registers/${user?.id}`)
-		const data = response.data
-		console.log("DATA", data)
+	const getInstitutions = async () => {
+		const response = await api.get("/institutions")
+
+		setInstitutionResult(response.data)
 	};
 
+	console.log("inst", institutionResult)
 	useEffect(() => {
-		getRegister()
-	}, [getRegister])
-
+		getInstitutions()
+	}, [])
 
 	return (
 		<AuthContext.Provider value={{ ...user, tokenContext, authenticate, logout, userRole, setUserRole, handleClick, setUserLocalStorage, institutionResult, setInstitutionResult, setResultUser, resultUser, loading, setLoading, setUserCPF, userCPF, setSelectValue, selectValue }}>

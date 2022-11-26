@@ -6,15 +6,4 @@ export const api = axios.create({
 
 });
 
-// api.interceptors.request.use(
-// 	(config) => {
-// 		const user = getUserLocalStorage()
-
-// 		config.headers?.common['Authorization'] = user.token;
-
-// 		return config;
-// 	},
-// 	(error) => {
-// 		return Promise.reject(error)
-// 	}
-// )
+// 	baseURL: " https://relife-web-service.onrender.com/"

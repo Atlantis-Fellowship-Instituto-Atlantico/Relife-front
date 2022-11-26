@@ -38,7 +38,7 @@ function AdminController() {
 
 
 	const filterUser = auth.resultUser?.filter(user => user.cpf?.startsWith(search));
-	const filterInstitution = auth.institutionResult?.filter(user => user.institution_name?.startsWith(search));
+	const filterInstitution = auth.institutionResult?.filter(user => user.institution_name?.toLowerCase().includes(search));
 
 	const buttonClickUser = () => {
 		setClickTable(true)
@@ -54,18 +54,17 @@ function AdminController() {
 	};
 
 
-	console.log(clickTable)
 	return (
 		<Box className="body">
 			<Box className="content">
 				<Box className="submenu">
 					<Header role="Admin" name={name} />
 					{/* <ProgressBar /> */}
-					<ButtonFilter placeholder="Digite o CPF do usuário" isInputActive={true} buttonOne="Usuários" buttonTwo="Instituições" valueInput={search} isButtonActiveTree={false} onChange={(e) => setSearch(e.target.value.toLowerCase())} onClickButtonOne={buttonClickUser} onClickButtonTwo={buttonClickUser2} />
+					<ButtonFilter placeholder={clickTable ? "Digite o CPF do usuário" : "Digite o nome da instituição"} isInputActive={true} buttonOne="Usuários" buttonTwo="Instituições" valueInput={search} isButtonActiveTree={false} onChange={(e) => setSearch(e.target.value.toLowerCase())} onClickButtonOne={buttonClickUser} onClickButtonTwo={buttonClickUser2} />
 					{!auth.loading && <Skeletons />}
 					{clickTable ? <TableContent header={{ name: "Nome", t2: "CPF" }} user={filterUser} isAdmin /> : <TableInstitution header={{ name: "Nome", t2: "Telefone" }} user={filterInstitution} isAdmin />}
 				</Box>
-				<Aside subTitleOne="Home" subTitleTwo="Cadastrar instituição" isIconActive={false} onClickButton={deleteUser} />
+				<Aside subTitleOne="Home" subTitleTwo="Cadastrar instituição" isIconActive={false} onClickButton={deleteUser} link2={"/cadastro/instituicao"} />
 			</Box>
 		</Box>
 	);

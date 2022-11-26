@@ -1,7 +1,7 @@
 
 import { Alert, Snackbar } from '@mui/material';
 import { Box } from '@mui/system'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import ReactInputMask from 'react-input-mask';
 import { useNavigate } from 'react-router-dom';
@@ -16,27 +16,20 @@ import "./style.css"
 export const UpdateUserInstitutionRegister = () => {
 
 
-	const [email, setEmail] = useState("");
-	const [cpf, setCPF] = useState("");
-	const [phone, setPhone] = useState("");
-	const [password, setPassword] = useState("");
-	const [passwordConfirmed, setPasswordConfirmed] = useState("");
-
-
-
 	const [open, setOpen] = useState(false);
 
 	const [message, setMessage] = useState("");
 	const auth = useAuth()
 
 
-	const { register, handleSubmit, formState: { errors }, setValue } = useForm<User>({ mode: 'all' });
+	const { register, handleSubmit, formState: { errors } } = useForm<User>({ mode: 'all' });
 
 
 	const navigate = useNavigate()
 
 	const updateUser = async (data: User) => {
 
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 		const user = {
 			blood_type: data.blood_type,
 			institution_id: auth.id,
@@ -45,20 +38,27 @@ export const UpdateUserInstitutionRegister = () => {
 
 		try {
 			await api.put(`/institutions/users/${auth.userCPF}`, user)
+
+
 			navigate("/dashboard/instituicao")
 
+
 		} catch (error) {
-			console.log(error)
+
 		}
 	}
 
 
 
+
 	const onSubmitHandler = async (data: User) => {
+
+
+
 		updateUser(data)
+
 	}
 
-	// const [selectValue, setSelectValue] = useState("");
 
 	const list = [
 		{ id: 1, name: 'Selecione' },

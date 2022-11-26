@@ -7,9 +7,7 @@ import { User } from '../../../../../../Types/User';
 import "./style.css"
 
 interface Props {
-	user?: Array<User>;
-	institution?: Array<Institution>;
-	admin?: Array<Admin>;
+
 
 	buttonOne?: string;
 	buttonTwo?: string;
@@ -27,7 +25,7 @@ interface Props {
 
 }
 
-export const ButtonFilter = ({ user, institution, admin, buttonOne, buttonTwo, buttonTree, placeholder, isInputActive, onChange, valueInput, onClickButtonOne, onClickButtonTwo, onClickButtonTree, isButtonActiveTree }: Props) => {
+export const ButtonFilter = ({ buttonOne, buttonTwo, buttonTree, placeholder, isInputActive, onChange, valueInput, onClickButtonOne, onClickButtonTwo, onClickButtonTree, isButtonActiveTree }: Props) => {
 
 	return (
 		<Box className="info-filter">

@@ -9,7 +9,6 @@ import { api } from '../../../services/api';
 import TableInstitution from '../components/tableInstitution/Index';
 import { useState } from "react";
 import { ButtonFilter } from '../components/tableInstitution/components/ButtonFilter/Index';
-import { User } from "../../../Types/User";
 
 function ReceiverController() {
 
@@ -24,7 +23,7 @@ function ReceiverController() {
 	const deleteUser = async () => {
 		await api.delete(`/users/${auth.id}`);
 		navigate("/login")
-		console.log("delete")
+
 	};
 
 	const buttonClick = () => {
@@ -35,10 +34,10 @@ function ReceiverController() {
 		setIsEnabled(false)
 	}
 
-
-	// const filterUser = auth.institutionResult?.filter(user => user.institution_name?.startsWith(search));
-	const filterInstitution = auth.institutionResult?.filter(user => user.institution_name?.startsWith(search));
+		;
+	const filterInstitution = auth.institutionResult?.filter(user => user.institution_name?.toLowerCase().includes(search));
 	// const filterUser = auth.institutionResult?.filter(user => user.institution_name.startsWith(search);
+
 
 	return (
 		<Box className="body">
@@ -48,7 +47,7 @@ function ReceiverController() {
 					<ButtonFilter placeholder="Digite nome da empresa" isInputActive={true} buttonOne="Estado" buttonTwo="Cidade" valueInput={search} isButtonActiveTree={false} onChange={(e) => setSearch(e.target.value.toLowerCase())} onClickButtonOne={buttonClick} onClickButtonTwo={buttonClick2} />
 					<TableInstitution header={{ name: "Nome", t2: "Telefone" }} user={filterInstitution} isInstitution />
 				</Box>
-				<Aside subTitleOne="Home" subTitleTwo="Editar cadastro" onClickButton={deleteUser} link2="/editar/usuario" link1="/home" />
+				<Aside subTitleOne="Home" subTitleTwo="Editar cadastro" onClickButton={deleteUser} link2="/editar/usuario" link1="/" isActiveOut={false} />
 			</Box>
 		</Box>
 	);

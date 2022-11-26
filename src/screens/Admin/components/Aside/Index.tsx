@@ -31,7 +31,7 @@ interface Props {
 
 export const Aside = ({ subTitleOne, link1, onClickButton, subTitleTwo, subTitleTree, isIconActive, height, isActiveOut = true, link2 }: Props) => {
 
-	// console.log(link1)
+
 	return (
 		<article className="article-lateral" style={{ height: height }}>
 

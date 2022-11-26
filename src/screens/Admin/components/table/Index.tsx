@@ -33,7 +33,7 @@ export default function TableContent({ header, name, t2, user, isAdmin }: Props)
 	const [selectedUser, setSelectedUser] = useState<Array<User>>()
 	const [sangue, setSangue] = useState('');
 
-	console.log(auth.userCPF)
+
 	const itemCopy = user
 
 	const onDelete = async (index: any, cpf: string) => {

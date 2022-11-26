@@ -104,7 +104,6 @@ export const UserContextProvider = ({ children }: UserContextProps) => {
 			complement: data.complement,
 		}
 
-		console.log("AQUI", user)
 		try {
 			await api.post("/users", user)
 			navigate("/dashboard/admin")
@@ -138,7 +137,6 @@ export const UserContextProvider = ({ children }: UserContextProps) => {
 			complement: data.complement,
 		}
 
-		console.log("AQUI", user)
 		try {
 			await api.put(`/users/${selectedUser}`, user)
 
@@ -162,7 +160,6 @@ export const UserContextProvider = ({ children }: UserContextProps) => {
 			institution: data.institution_id
 		}
 
-		console.log("AQUI", user)
 
 		await api.put(`/users/${selectedUser}`, user)
 
@@ -174,7 +171,7 @@ export const UserContextProvider = ({ children }: UserContextProps) => {
 	const deleteUser = async () => {
 		await api.delete(`/users/${selectedUser}`);
 		auth.setUserLocalStorage(null)
-		console.log("delete")
+
 	};
 
 	return (

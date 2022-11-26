@@ -91,7 +91,6 @@ export const UserRegister = () => {
 			complement: data.complement,
 		}
 
-		console.log("AQUI", user)
 		try {
 			await api.put(`/users/${auth.id}`, user)
 
@@ -129,7 +128,7 @@ export const UserRegister = () => {
 			complement: data.complement,
 		}
 
-		console.log("AQUI", user)
+
 		try {
 			await api.post("/users", user)
 			navigate("/login")
@@ -140,7 +139,7 @@ export const UserRegister = () => {
 		}
 	}
 
-	console.log(auth.id)
+
 	const onSubmitHandler = async (data: User) => {
 
 		if (auth.id === undefined) {

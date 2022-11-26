@@ -9,6 +9,7 @@ interface Props {
 	height: string
 	top: string
 	link?: string
+
 	title?: string
 	subTitle?: string
 

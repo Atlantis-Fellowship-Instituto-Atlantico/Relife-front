@@ -14,7 +14,7 @@ export const Menu = () => {
 				<ul>
 					<li className='doe'>
 						<Link to="/login">
-							Doe agora
+							Cadastre-se agora
 						</Link>
 					</li>
 					<li>
